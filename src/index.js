@@ -10,6 +10,14 @@ import { Provider } from "react-redux";
 import rootReducer from "./rootReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 
+// const cors = require('cors');
+// const corsOptions ={
+//     origin:'http://localhost:3000', 
+//     credentials:true,            //access-control-allow-credentials:true
+//     optionSuccessStatus:200
+// }
+// app.use(cors(corsOptions));
+
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
