@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Grid, Segment, Image } from "semantic-ui-react";
+import { Form, Button, Grid, Segment } from "semantic-ui-react";
 import InlineError from "../messages/InlineError";
 
 class TrackForm extends React.Component {
@@ -124,15 +124,6 @@ class TrackForm extends React.Component {
                   />
                   {errors.pages && <InlineError text={errors.pages} />}
                 </Form.Field>
-              </Grid.Column>
-
-              <Grid.Column>
-                <Image size="small" src={data.cover} />
-                {this.state.covers.length > 1 && (
-                  <a role="button" tabIndex={0} onClick={this.changeCover}>
-                    Another cover
-                  </a>
-                )}
               </Grid.Column>
             </Grid.Row>
 

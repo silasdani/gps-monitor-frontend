@@ -1,36 +1,41 @@
-import "semantic-ui-css/semantic.min.css";
+
+import reportWebVitals from "./reportWebVitals";
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter, Route } from "react-router-dom";
+import "semantic-ui-css/semantic.min.css";
 import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import rootReducer from "./rootReducer";
+import thunk from "redux-thunk";
+import decode from "jwt-decode";
 import { composeWithDevTools } from "redux-devtools-extension";
-
-// const cors = require('cors');
-// const corsOptions ={
-//     origin:'http://localhost:3000', 
-//     credentials:true,            //access-control-allow-credentials:true
-//     optionSuccessStatus:200
-// }
-// app.use(cors(corsOptions));
+import App from "./App";
+import rootReducer from "./rootReducer";
+import { userLoggedIn } from "./actions/auth";
+import setAuthorizationHeader from "./utils/setAuthorizationHeader";
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
+if (localStorage.bookwormJWT) {
+  const payload = decode(localStorage.bookwormJWT);
+  const user = {
+    token: localStorage.bookwormJWT,
+    email: payload.email,
+    confirmed: payload.confirmed
+  };
+  setAuthorizationHeader(localStorage.bookwormJWT);
+  store.dispatch(userLoggedIn(user));
+}
+
 ReactDOM.render(
   <BrowserRouter>
-    <Provider store={store}><App /></Provider>
+    <Provider store={store}>
+      <Route component={App} />
+    </Provider>
   </BrowserRouter>,
   document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

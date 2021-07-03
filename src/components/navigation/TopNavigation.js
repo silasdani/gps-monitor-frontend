@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Menu, Dropdown, Image } from "semantic-ui-react";
+import { Menu, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import gravatarUrl from "gravatar-url";
 import * as actions from "../../actions/auth";
 import { allTracksSelector } from "../../reducers/tracks";
 
@@ -19,11 +18,11 @@ const TopNavigation = ({ user, logout, hasTracks }) => (
     )}
 
     <Menu.Menu position="right">
-      <Dropdown trigger={<Image avatar src={gravatarUrl(user.email)} />}>
+      
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown>
+      
     </Menu.Menu>
   </Menu>
 );

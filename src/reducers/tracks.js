@@ -1,10 +1,10 @@
 import { createSelector } from "reselect";
-import { TRACKS_FETCHED, K_CREATED } from "../types";
+import { TRACKS_FETCHED, TRACK_CREATED } from "../types";
 
 export default function tracks(state = {}, action = {}) {
   switch (action.type) {
     case TRACKS_FETCHED:
-    case K_CREATED:
+    case TRACK_CREATED:
       return { ...state, ...action.data.entities.tracks };
     default:
       return state;

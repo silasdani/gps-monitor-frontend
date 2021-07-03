@@ -8,7 +8,7 @@ const AddTrackCtA = () => (
     <Card.Content textAlign="center">
       <Card.Header>Add new track</Card.Header>
       <Link to="/tracks/new">
-        <Icon name="plus circle" size="massive" />
+        <Icon name="plus circle" size="big" />
       </Link>
     </Card.Content>
   </Card>

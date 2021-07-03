@@ -11,7 +11,7 @@ const tracksFetched = data => ({
 });
 
 const trackCreated = data => ({
-  type: TRACKK_CREATED,
+  type: TRACK_CREATED,
   data
 });
 
