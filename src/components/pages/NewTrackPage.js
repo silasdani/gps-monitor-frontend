@@ -7,7 +7,7 @@ import SearchTrackForm from "../forms/SearchTrackForm";
 import TrackForm from "../forms/TrackForm";
 import { createTrack } from "../../actions/tracks";
 
-class NewTrackkPage extends React.Component {
+class NewTrackPage extends React.Component {
   state = {
     track: null
   };
@@ -15,9 +15,9 @@ class NewTrackkPage extends React.Component {
   onTrackSelect = track => {
     this.setState({ track });
     axios
-      .get(`/api/tracks/fetchPages?goodreadsId=${track.goodreadsId}`)
-      .then(res => res.data.pages)
-      .then(pages => this.setState({ track: { ...track, pages } }));
+      .get(`/tracks/`)
+      .then(res => res.data.data)
+      .then(tracks => this.setState({ track: { ...track, tracks } }));
   };
 
   addTrack = track =>
@@ -28,7 +28,7 @@ class NewTrackkPage extends React.Component {
   render() {
     return (
       <Segment>
-        <h1>Add new track to your collection</h1>
+        <h1>Add new track</h1>
         <SearchTrackForm onTrackSelect={this.onTrackSelect} />
 
         {this.state.track && (
@@ -39,11 +39,11 @@ class NewTrackkPage extends React.Component {
   }
 }
 
-NewTrackkPage.propTypes = {
+NewTrackPage.propTypes = {
   createTrack: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired
 };
 
-export default connect(null, { createTrack })(NewTrackkPage);
+export default connect(null, { createTrack })(NewTrackPage);

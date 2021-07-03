@@ -18,11 +18,11 @@ const TopNavigation = ({ user, logout, hasTracks }) => (
     )}
 
     <Menu.Menu position="right">
-      
+      <Dropdown>
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
         </Dropdown.Menu>
-      
+      </Dropdown>
     </Menu.Menu>
   </Menu>
 );

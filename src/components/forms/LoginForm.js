@@ -8,31 +8,38 @@ class LoginForm extends React.Component {
   state = {
     data: {
       email: "",
-      password: ""
+      password: "",
     },
     loading: false,
-    errors: {}
+    errors: {},
   };
 
-  onChange = e =>
+  onChange = (e) =>
     this.setState({
-      data: { ...this.state.data, [e.target.name]: e.target.value }
+      data: { ...this.state.data, [e.target.name]: e.target.value },
     });
 
-  onSubmit = () => {
-    const errors = this.validate(this.state.data);
+  onSubmit = () => { // se trimite formularul catre loginPages
+    const errors = this.validate(this.state.data); // se valideaza datele
     this.setState({ errors });
-    if (Object.keys(errors).length === 0) {
+    if (Object.keys(errors).length === 0) {  // daca nu avem erori, facem request
       this.setState({ loading: true });
       this.props
-        .submit(this.state.data)
-        .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
+        .submit(this.state.data) // se trimit credentialele carte auth
+        .catch((err) => 
+          {
+            // console.warn(err)
+          this.setState({
+            errors: { global: "Smt went wrong!" },
+            loading: false,
+          })
+          }
+        
         );
     }
   };
 
-  validate = data => {
+  validate = (data) => {
     const errors = {};
     if (!Validator.isEmail(data.email)) errors.email = "Invalid email";
     if (!data.password) errors.password = "Can't be blank";
@@ -81,7 +88,7 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  submit: PropTypes.func.isRequired
+  submit: PropTypes.func.isRequired,
 };
 
 export default LoginForm;
