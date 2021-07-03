@@ -4,7 +4,6 @@ import { TRACKS_FETCHED, TRACK_CREATED } from "../types";
 import api from "../api";
 import { trackSchema } from "../schemas";
 
-// data.entities.tracks
 const tracksFetched = data => ({
   type: TRACKS_FETCHED,
   data

@@ -6,13 +6,11 @@ import InlineError from "../messages/InlineError";
 class TrackForm extends React.Component {
   state = {
     data: {
-      goodreadsId: this.props.track.goodreadsId,
-      title: this.props.track.title,
-      authors: this.props.track.authors,
-      cover: this.props.track.covers[0],
-      pages: this.props.track.pages
+      id: this.props.track.id,
+      date: this.props.track.date,
+      distance: this.props.track.distance,
+      time: this.props.track.time,
     },
-    covers: this.props.track.covers,
     index: 0,
     loading: false,
     errors: {}
@@ -21,13 +19,11 @@ class TrackForm extends React.Component {
   componentWillReceiveProps(props) {
     this.setState({
       data: {
-        goodreadsId: props.track.goodreadsId,
-        title: props.track.title,
-        authors: props.track.authors,
-        cover: props.track.covers[0],
-        pages: props.track.pages
+        id: props.track.id,
+        date: props.track.title,
+        distance: props.track.distance,
+        time: props.track.time,
       },
-      covers: props.track.covers
     });
   }
 
@@ -35,15 +31,6 @@ class TrackForm extends React.Component {
     this.setState({
       ...this.state,
       data: { ...this.state.data, [e.target.name]: e.target.value }
-    });
-
-  onChangeNumber = e =>
-    this.setState({
-      ...this.state,
-      data: {
-        ...this.state.data,
-        [e.target.name]: parseInt(e.target.value, 10)
-      }
     });
 
   onSubmit = e => {
@@ -60,20 +47,11 @@ class TrackForm extends React.Component {
     }
   };
 
-  changeCover = () => {
-    const { index, covers } = this.state;
-    const newIndex = index + 1 >= covers.length ? 0 : index + 1;
-    this.setState({
-      index: newIndex,
-      data: { ...this.state.data, cover: covers[newIndex] }
-    });
-  };
 
   validate = data => {
     const errors = {};
     if (!data.title) errors.title = "Can't be blank";
-    if (!data.authors) errors.authors = "Can't be blank";
-    if (!data.pages) errors.pages = "Can't be blank";
+    if (!data.distance) errors.distance = "Can't be blank";
     return errors;
   };
 
@@ -86,43 +64,41 @@ class TrackForm extends React.Component {
           <Grid columns={2} stackable>
             <Grid.Row>
               <Grid.Column>
-                <Form.Field error={!!errors.title}>
-                  <label htmlFor="title">Track Title</label>
+                <Form.Field error={!!errors.date}>
+                  <label htmlFor="date">Track date</label>
                   <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    placeholder="Title"
-                    value={data.title}
+                    type="datetime-local"
+                    id="date"
+                    name="date"
+                    value={data.date}
                     onChange={this.onChange}
                   />
-                  {errors.title && <InlineError text={errors.title} />}
+                  {errors.date && <InlineError text={errors.date} />}
                 </Form.Field>
 
-                <Form.Field error={!!errors.authors}>
-                  <label htmlFor="authors">Track Authors</label>
+                <Form.Field error={!!errors.distance}>
+                  <label htmlFor="float">Track distance</label>
                   <input
-                    type="text"
-                    id="authors"
-                    name="authors"
-                    placeholder="Authors"
-                    value={data.authors}
+                    type="number"
+                    id="distance"
+                    name="distance"
+                    placeholder="km"
+                    value={data.distance}
                     onChange={this.onChange}
                   />
-                  {errors.authors && <InlineError text={errors.authors} />}
+                  {errors.distance && <InlineError text={errors.distance} />}
                 </Form.Field>
 
-                <Form.Field error={!!errors.pages}>
-                  <label htmlFor="pages">Pages</label>
+                <Form.Field error={!!errors.time}>
+                  <label htmlFor="time">Jogging time</label>
                   <input
-                    disabled={data.pages === undefined}
-                    type="text"
-                    id="pages"
-                    name="pages"
-                    value={data.pages !== undefined ? data.pages : "Loading..."}
-                    onChange={this.onChangeNumber}
+                    type="number"
+                    id="time"
+                    name="time"
+                    value={data.time}
+                    onChange={this.onChange}
                   />
-                  {errors.pages && <InlineError text={errors.pages} />}
+                  {errors.time && <InlineError text={errors.time} />}
                 </Form.Field>
               </Grid.Column>
             </Grid.Row>
@@ -140,11 +116,9 @@ class TrackForm extends React.Component {
 TrackForm.propTypes = {
   submit: PropTypes.func.isRequired,
   track: PropTypes.shape({
-    goodreadsId: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    authors: PropTypes.string.isRequired,
-    covers: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    pages: PropTypes.number
+    date: PropTypes.instanceOf(Date).isRequired,
+    distance: PropTypes.number.isRequired,
+    time: PropTypes.number.isRequired
   }).isRequired
 };
 

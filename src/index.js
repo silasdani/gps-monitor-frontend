@@ -19,14 +19,14 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-if (localStorage.bookwormJWT) {
-  const payload = decode(localStorage.bookwormJWT);
+if (localStorage.token) {
+  const payload = decode(localStorage.token);
   const user = {
-    token: localStorage.bookwormJWT,
+    token: localStorage.token,
     email: payload.email,
     confirmed: payload.confirmed
   };
-  setAuthorizationHeader(localStorage.bookwormJWT);
+  setAuthorizationHeader(localStorage.token);
   store.dispatch(userLoggedIn(user));
 }
 

@@ -12,18 +12,21 @@ export const userLoggedOut = () => ({
   type: USER_LOGGED_OUT,
 });
 
+
+// DONE
 export const login = (credentials) => (dispatch) =>
   api.user.login(credentials).then((user) => {
-    console.log(credentials);
-    console.log(user);
+    localStorage.name = user.name;
+    localStorage.current_id = user.id;
     localStorage.token = user.remember_digest;
     setAuthorizationHeader(user.remember_digest);
     dispatch(userLoggedIn(user));
   });
 
+// DONE
 export const logout = () => (dispatch) =>
   api.user.logout().then(() => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     setAuthorizationHeader();
     dispatch(userLoggedOut());
   });

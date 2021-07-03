@@ -7,19 +7,20 @@ import * as actions from "../../actions/auth";
 import { allTracksSelector } from "../../reducers/tracks";
 
 const TopNavigation = ({ user, logout, hasTracks }) => (
+  
   <Menu secondary pointing>
     <Menu.Item as={Link} to="/dashboard">
       Dashboard
     </Menu.Item>
-    {hasTracks && (
+    {(
       <Menu.Item as={Link} to="/tracks/new">
         Add New Track
       </Menu.Item>
     )}
 
     <Menu.Menu position="right">
-      <Dropdown>
-        <Dropdown.Menu>
+      <Dropdown text={user.name}>
+        <Dropdown.Menu >
           <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
