@@ -3,15 +3,20 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../actions/auth";
+import TracksTable from "../tables/TracksTable";
 
 const HomePage = ({ isAuthenticated, logout }) => (
   <div>
     <h1>Home Page</h1>
     {isAuthenticated ? (
-      <button onClick={() => logout()}>Logout</button>
+      <div>
+        <button onClick={() => logout()}>Logout</button>
+        <TracksTable />
+      </div>
     ) : (
       <div>
         <Link to="/login">Login</Link> or <Link to="/signup">Sign Up</Link>
+        <TracksTable />
       </div>
     )}
   </div>
@@ -19,12 +24,12 @@ const HomePage = ({ isAuthenticated, logout }) => (
 
 HomePage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: !!state.user.token
+    isAuthenticated: !!localStorage.token,
   };
 }
 

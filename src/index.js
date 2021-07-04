@@ -19,14 +19,15 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-if (localStorage.token) {
-  const payload = decode(localStorage.token);
+if (localStorage.tok) {
+  const payload = decode(localStorage.tok);
   const user = {
-    token: localStorage.token,
+    token: localStorage.tok,
     email: payload.email,
-    confirmed: payload.confirmed
+    confirmed: payload.confirmed,
+    name: payload.name
   };
-  setAuthorizationHeader(localStorage.token);
+  setAuthorizationHeader(localStorage.tok);
   store.dispatch(userLoggedIn(user));
 }
 

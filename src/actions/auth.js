@@ -17,6 +17,7 @@ export const userLoggedOut = () => ({
 export const login = (credentials) => (dispatch) =>
   api.user.login(credentials).then((user) => {
     localStorage.name = user.name;
+    localStorage.confirmed = user.activated;
     localStorage.current_id = user.id;
     localStorage.token = user.remember_digest;
     setAuthorizationHeader(user.remember_digest);

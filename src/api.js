@@ -7,7 +7,7 @@ export default {
       axios
         .post("/login", {
           email: credentials.email,
-          password: credentials.password,
+          password: credentials.password
         })
         .then((res) => res.data.data.attributes),
 
@@ -33,8 +33,8 @@ export default {
     resetPassword: (data) => axios.post("/reset_password", { data }),
   },
   tracks: {
-    fetchAll: () => axios.get("/tracks/" + localStorage.current_id).then((res) => res.data.tracks),
+    fetchAll: () => axios.get("/tracks/" + localStorage.current_id).then((res) => res.data.attributes),
     create: (track) =>
-      axios.post("/tracks", { track }).then((res) => res.data.track),
+      axios.post("/tracks", { track }).then((res) => res.data.attributes),
   },
 };
