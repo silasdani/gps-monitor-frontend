@@ -7,14 +7,13 @@ export default {
       axios
         .post("/login", {
           email: credentials.email,
-          password: credentials.password
+          password: credentials.password,
         })
         .then((res) => res.data.data.attributes),
 
     // DONE
     logout: () => axios.delete("/logout"),
-
-    // DONE
+    
     signup: (user) =>
       axios.post("/users", { user }).then((res) => {
         return res.data.data.attributes;
@@ -26,8 +25,7 @@ export default {
         .post("/account_activations", { token })
         .then((res) => res.data.data.attributes),
     // TODO
-    resetPasswordRequest: (email) =>
-      axios.post("/password_resets", { email }),
+    resetPasswordRequest: (email) => axios.post("/password_resets", { email }),
 
     validateToken: (token) => axios.post("/validate_token", { token }),
     resetPassword: (data) => axios.post("/reset_password", { data }),
@@ -36,7 +34,10 @@ export default {
     fetchAll: () => axios.get("/tracks/1").then((res) => res.data.data),
 
     create: (track) =>
-      axios.post("/tracks", { track }).then((res) => res.data.data)
-      .catch((err) => console.warn(err)),
+      axios.post("/tracks", { track }).then((res) => res.data.data),
+    update: (track) =>
+      axios.patch("/tracks/" + track.id).then((res) => res.data.data),
+    delete: (track) =>
+      axios.patch("/tracks/" + track.id).then((res) => res.data.data)
   },
 };

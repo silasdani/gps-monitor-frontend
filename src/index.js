@@ -11,7 +11,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./App";
 import rootReducer from "./rootReducer";
 import { userLoggedIn } from "./actions/auth";
-import { fetchTracks } from "./actions/tracks";
 import setAuthorizationHeader from "./utils/setAuthorizationHeader";
 
 const store = createStore(
@@ -32,7 +31,6 @@ if (localStorage.token) {
 
   setAuthorizationHeader(localStorage.token);
   store.dispatch(userLoggedIn(user));
-  store.dispatch(fetchTracks())
 }
 
 ReactDOM.render(

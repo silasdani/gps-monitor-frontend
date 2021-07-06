@@ -13,6 +13,7 @@ import NewTrackPage from "./components/pages/TracksCrud/NewTrackPage";
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
+import EditTrackPage from "./components/pages/TracksCrud/EditTrackPage";
 
 const App = ({ location, isAuthenticated }) => (
   <div>
@@ -60,6 +61,12 @@ const App = ({ location, isAuthenticated }) => (
         path="/tracks/new"
         exact
         component={NewTrackPage}
+      />
+      <UserRoute
+        location={location}
+        path="/tracks/edit"
+        exact
+        component={EditTrackPage}
       />
     </div>
   </div>

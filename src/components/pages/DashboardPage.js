@@ -2,22 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
-// import { allTracksSelector } from "../../reducers/tracks";
-// import AddTrackCtA from "../ctas/AddTrackCtA";
-// import { fetchTracks } from "../../actions/tracks";
+import { fetchTracks } from "../../actions/tracks";
 import TracksTable from "../tables/TracksTable";
 
 class DashboardPage extends React.Component {
-  // componentDidMount = () => this.onInit(this.props);
-
-  // onInit = props => props.fetchTracks()
+  submit = () => 
+  this.props.fetchTracks().then(() => this.props.history.push("/dashboard"));
 
   render() {
-    const { isConfirmed } = this.props;
+    const { isConfirmed, records } = this.props;
     return (
       <div>
         {!isConfirmed && <ConfirmEmailMessage />}
-        <TracksTable />
+        <TracksTable submit={this.submit} tracks={records}/>
       </div>
     );
   }
@@ -25,12 +22,14 @@ class DashboardPage extends React.Component {
 
 DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
+  records: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    isConfirmed: !!state.user.activated
+    isConfirmed: !!state.user.activated,
+    records: state.tracks
   };
 }
 
-export default connect(mapStateToProps, {  })(DashboardPage);
+export default connect(mapStateToProps, { fetchTracks })(DashboardPage);

@@ -14,7 +14,7 @@ class NewTrackPage extends React.Component {
   render() {
     return (
       <Segment>
-        <h1>Add new track</h1>
+        <h1>EditPage</h1>
         <TrackForm submit={this.addTrack} />
       </Segment>
     );
