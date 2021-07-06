@@ -58,7 +58,7 @@ class SignupForm extends React.Component {
             type="text"
             id="name"
             name="name"
-            placeholder="your name"
+            placeholder="Name"
             value={data.name}
             onChange={this.onChange}
           />

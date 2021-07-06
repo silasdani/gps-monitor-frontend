@@ -1,26 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Menu, Dropdown } from "semantic-ui-react";
+import { Menu, Dropdown, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../../actions/auth";
-import { allTracksSelector } from "../../reducers/tracks";
 
-const TopNavigation = ({ user, logout, hasTracks }) => (
-  
+const TopNavigation = ({ user, logout }) => (
   <Menu secondary pointing>
     <Menu.Item as={Link} to="/dashboard">
       Dashboard
     </Menu.Item>
-    {(
+    {
       <Menu.Item as={Link} to="/tracks/new">
         Add New Track
+      </Menu.Item>
+    }
+
+    {(user.admin || user.manager) && (
+      <Menu.Item as={Link} to="/users">
+        Manage Users
       </Menu.Item>
     )}
 
     <Menu.Menu position="right">
-      <Dropdown text={user.name}>
-        <Dropdown.Menu >
+      <h2>{user.name}</h2>
+      <Dropdown
+        trigger={
+          <Image
+            floated="right"
+            size="mini"
+            src={"https://i.pravatar.cc/150?u=" + localStorage.name}
+          />
+        }
+      >
+        <Dropdown.Menu>
           <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -30,16 +43,14 @@ const TopNavigation = ({ user, logout, hasTracks }) => (
 
 TopNavigation.propTypes = {
   user: PropTypes.shape({
-    email: PropTypes.string.isRequired
+    email: PropTypes.string.isRequired,
   }).isRequired,
-  hasTracks: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     user: state.user,
-    hasTracks: allTracksSelector(state).length > 0
   };
 }
 

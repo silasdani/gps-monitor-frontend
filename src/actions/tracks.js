@@ -1,8 +1,6 @@
   
-import { normalize } from "normalizr";
 import { TRACKS_FETCHED, TRACK_CREATED } from "../types";
 import api from "../api";
-import { trackSchema } from "../schemas";
 
 const tracksFetched = data => ({
   type: TRACKS_FETCHED,
@@ -17,9 +15,9 @@ const trackCreated = data => ({
 export const fetchTracks = () => dispatch =>
   api.tracks
     .fetchAll()
-    .then(tracks => dispatch(tracksFetched(normalize(tracks, [trackSchema]))));
+    .then(tracks => dispatch(tracksFetched(tracks)));
 
 export const createTrack = data => dispatch =>
   api.tracks
     .create(data)
-    .then(track => dispatch(trackCreated(normalize(track, trackSchema))));
+    .then(track => dispatch(trackCreated(track)));

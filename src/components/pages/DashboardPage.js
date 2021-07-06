@@ -2,22 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
-import { allTracksSelector } from "../../reducers/tracks";
-import AddTrackCtA from "../ctas/AddTrackCtA";
-import { fetchTracks } from "../../actions/tracks";
+// import { allTracksSelector } from "../../reducers/tracks";
+// import AddTrackCtA from "../ctas/AddTrackCtA";
+// import { fetchTracks } from "../../actions/tracks";
+import TracksTable from "../tables/TracksTable";
 
 class DashboardPage extends React.Component {
-  componentDidMount = () => this.onInit(this.props);
+  // componentDidMount = () => this.onInit(this.props);
 
-  onInit = props => props.fetchTracks();
+  // onInit = props => props.fetchTracks()
 
   render() {
-    const { isConfirmed, tracks } = this.props;
+    const { isConfirmed } = this.props;
     return (
       <div>
         {!isConfirmed && <ConfirmEmailMessage />}
-
-        {tracks.length === 0 ? <AddTrackCtA /> : <p>You have tracks!</p>}
+        <TracksTable />
       </div>
     );
   }
@@ -25,19 +25,12 @@ class DashboardPage extends React.Component {
 
 DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
-  fetchTracks: PropTypes.func.isRequired,
-  tracks: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    isConfirmed: !!state.user.confirmed,
-    tracks: allTracksSelector(state)
+    isConfirmed: !!state.user.activated
   };
 }
 
-export default connect(mapStateToProps, { fetchTracks })(DashboardPage);
+export default connect(mapStateToProps, {  })(DashboardPage);

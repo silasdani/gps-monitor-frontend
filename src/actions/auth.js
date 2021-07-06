@@ -1,6 +1,5 @@
 import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../types";
 import api from "../api";
-
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
 
 export const userLoggedIn = (user) => ({
@@ -12,13 +11,14 @@ export const userLoggedOut = () => ({
   type: USER_LOGGED_OUT,
 });
 
-
 // DONE
 export const login = (credentials) => (dispatch) =>
   api.user.login(credentials).then((user) => {
     localStorage.name = user.name;
     localStorage.confirmed = user.activated;
     localStorage.current_id = user.id;
+    localStorage.admin = user.admin;
+    localStorage.manager = user.manager;
     localStorage.token = user.remember_digest;
     setAuthorizationHeader(user.remember_digest);
     dispatch(userLoggedIn(user));

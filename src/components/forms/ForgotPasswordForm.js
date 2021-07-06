@@ -7,19 +7,19 @@ import InlineError from "../messages/InlineError";
 class ForgotPasswordForm extends React.Component {
   state = {
     data: {
-      email: ""
+      email: "",
     },
     loading: false,
-    errors: {}
+    errors: {},
   };
 
-  onChange = e =>
+  onChange = (e) =>
     this.setState({
       ...this.state,
-      data: { ...this.state.data, [e.target.name]: e.target.value }
+      data: { ...this.state.data, [e.target.name]: e.target.value },
     });
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({ errors });
@@ -27,13 +27,13 @@ class ForgotPasswordForm extends React.Component {
       this.setState({ loading: true });
       this.props
         .submit(this.state.data)
-        .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
+        .catch(() =>
+          this.setState({ errors: "Email address not found", loading: false })
         );
     }
   };
 
-  validate = data => {
+  validate = (data) => {
     const errors = {};
     if (!isEmail(data.email)) errors.email = "Invalid email";
     return errors;
@@ -64,7 +64,7 @@ class ForgotPasswordForm extends React.Component {
 }
 
 ForgotPasswordForm.propTypes = {
-  submit: PropTypes.func.isRequired
+  submit: PropTypes.func.isRequired,
 };
 
 export default ForgotPasswordForm;

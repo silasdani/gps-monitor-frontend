@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// TODO: TOKENS 
 const setHeader = () => (token = null) => {
   if (token) { 
     axios.defaults.headers.common.authorization = `Bearer ${token}`;

@@ -1,57 +1,39 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Grid, Segment } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import InlineError from "../messages/InlineError";
-
 class TrackForm extends React.Component {
   state = {
     data: {
-      id: this.props.track.id,
-      date: this.props.track.date,
-      distance: this.props.track.distance,
-      time: this.props.track.time,
+      date: "2021-06-01T08:30",
+      distance: 0,
+      time: 0,
     },
-    index: 0,
     loading: false,
     errors: {}
   };
 
-  componentWillReceiveProps(props) {
-    this.setState({
-      data: {
-        id: props.track.id,
-        date: props.track.title,
-        distance: props.track.distance,
-        time: props.track.time,
-      },
-    });
-  }
-
-  onChange = e =>
+  onChange = (e) =>
     this.setState({
       ...this.state,
-      data: { ...this.state.data, [e.target.name]: e.target.value }
+      data: { ...this.state.data, [e.target.name]: e.target.value },
     });
 
-  onSubmit = e => {
-    e.preventDefault();
+  onSubmit = () => {
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props
         .submit(this.state.data)
-        .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
-        );
+        .catch((err) => { this.setState({ errors, loading: false }) });
     }
   };
 
-
-  validate = data => {
+  validate = (data) => {
     const errors = {};
-    if (!data.title) errors.title = "Can't be blank";
-    if (!data.distance) errors.distance = "Can't be blank";
+    if (data.time <= 0) errors.time = "Can't be 0";
+    if (data.distance <= 0) errors.distance = "Can't be 0";
     return errors;
   };
 
@@ -59,56 +41,44 @@ class TrackForm extends React.Component {
     const { errors, data, loading } = this.state;
 
     return (
-      <Segment>
-        <Form onSubmit={this.onSubmit} loading={loading}>
-          <Grid columns={2} stackable>
-            <Grid.Row>
-              <Grid.Column>
-                <Form.Field error={!!errors.date}>
-                  <label htmlFor="date">Track date</label>
-                  <input
-                    type="datetime-local"
-                    id="date"
-                    name="date"
-                    value={data.date}
-                    onChange={this.onChange}
-                  />
-                  {errors.date && <InlineError text={errors.date} />}
-                </Form.Field>
+      <Form onSubmit={this.onSubmit} loading={loading}>
+        <Form.Field>
+          <label htmlFor="date">Track date</label>
+          <input
+            type="datetime-local"
+            id="date"
+            name="date"
+            value={data.date}
+            onChange={this.onChange}
+          />
+        </Form.Field>
 
-                <Form.Field error={!!errors.distance}>
-                  <label htmlFor="float">Track distance</label>
-                  <input
-                    type="number"
-                    id="distance"
-                    name="distance"
-                    placeholder="km"
-                    value={data.distance}
-                    onChange={this.onChange}
-                  />
-                  {errors.distance && <InlineError text={errors.distance} />}
-                </Form.Field>
+        <Form.Field>
+          <label htmlFor="float">Distance (Km)</label>
+          <input
+            type="number"
+            id="distance"
+            name="distance"
+            placeholder="km"
+            value={data.distance}
+            onChange={this.onChange}
+          />
+          {errors.distance && <InlineError text={errors.distance} />}
+        </Form.Field>
 
-                <Form.Field error={!!errors.time}>
-                  <label htmlFor="time">Jogging time</label>
-                  <input
-                    type="number"
-                    id="time"
-                    name="time"
-                    value={data.time}
-                    onChange={this.onChange}
-                  />
-                  {errors.time && <InlineError text={errors.time} />}
-                </Form.Field>
-              </Grid.Column>
-            </Grid.Row>
-
-            <Grid.Row>
-              <Button primary>Save</Button>
-            </Grid.Row>
-          </Grid>
-        </Form>
-      </Segment>
+        <Form.Field>
+          <label htmlFor="time">Jogging time (seconds)</label>
+          <input
+            type="number"
+            id="time"
+            name="time"
+            value={data.time}
+            onChange={this.onChange}
+          />
+          {errors.time && <InlineError text={errors.time} />}
+        </Form.Field>
+        <Button primary>Save</Button>
+      </Form>
     );
   }
 }
@@ -118,8 +88,8 @@ TrackForm.propTypes = {
   track: PropTypes.shape({
     date: PropTypes.instanceOf(Date).isRequired,
     distance: PropTypes.number.isRequired,
-    time: PropTypes.number.isRequired
-  }).isRequired
+    time: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default TrackForm;

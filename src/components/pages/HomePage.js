@@ -1,22 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../actions/auth";
-import TracksTable from "../tables/TracksTable";
 
 const HomePage = ({ isAuthenticated, logout }) => (
-  <div>
-    <h1>Home Page</h1>
+  <div Style="text-align: center;">
+    <h2>Home</h2>
     {isAuthenticated ? (
       <div>
         <button onClick={() => logout()}>Logout</button>
-        <TracksTable />
       </div>
     ) : (
       <div>
-        <Link to="/login">Login</Link> or <Link to="/signup">Sign Up</Link>
-        <TracksTable />
+        <p>
+          This is a website used to track the time records of it's users activity.
+        </p>
+        <a className="ui blue button" href="/login">
+          Login »
+        </a>
+        <a className="ui blue button" href="/signup">
+          Sign up »
+        </a>
       </div>
     )}
   </div>
@@ -29,7 +33,7 @@ HomePage.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: !!localStorage.token,
+    isAuthenticated: !!state.user.remember_digest,
   };
 }
 
