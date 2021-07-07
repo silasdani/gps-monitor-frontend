@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Card, Image, Button } from "semantic-ui-react";
 import axios from "axios";
 import Momemt from "moment";
@@ -44,6 +43,8 @@ class TracksTable extends React.Component {
     axios.delete(`/tracks/` + id).then(this.setState({ loading: false }));
   };
 
+  edit = () => {};
+
   render() {
     return (
       <div className="ui container">
@@ -58,7 +59,9 @@ class TracksTable extends React.Component {
                 />
                 <Card.Header>{localStorage.name}</Card.Header>
                 <Card.Meta>
-                  {Momemt(element.attributes.date).format("MMM Do YYYY")}
+                  {Momemt(element.attributes.date).format(
+                    "MMM Do YYYY, h:mm a"
+                  )}
                 </Card.Meta>
                 <Card.Description>
                   <p>
@@ -79,16 +82,15 @@ class TracksTable extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className="ui two buttons">
+                <div className ="ui large buttons">
                   <Button
-                    basic
-                    color="blue"
-                    href="/tracks/edit"
-                    onClick={(localStorage.editID = element.id)}
+                    className="inverted yellow"
+                    href={"/tracks/edit/" + element.id}
                   >
                     Edit
                   </Button>
-                  <Button basic color="red" onClick={this.onDelete}>
+                  <div className="or"></div>
+                  <Button className="inverted red" onClick={this.onDelete}>
                     Delete
                   </Button>
                 </div>
@@ -100,9 +102,5 @@ class TracksTable extends React.Component {
     );
   }
 }
-
-TracksTable.propTypes = {
-  fetchTracks: PropTypes.func.isRequired,
-};
 
 export default TracksTable;

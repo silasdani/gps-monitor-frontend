@@ -51,6 +51,8 @@ class SignupForm extends React.Component {
     const { data, errors, loading } = this.state;
 
     return (
+      <div>
+        <h1>Sign up</h1>
       <Form onSubmit={this.onSubmit} loading={loading}>
         <Form.Field error={!!errors.name}>
           <label htmlFor="text">Name</label>
@@ -108,6 +110,7 @@ class SignupForm extends React.Component {
 
         <Button primary>Sign Up</Button>
       </Form>
+      </div>
     );
   }
 }

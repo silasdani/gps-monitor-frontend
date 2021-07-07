@@ -29,7 +29,7 @@ class ResetPasswordForm extends React.Component {
       this.props
         .submit(this.state.data)
         .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
+          this.setState({ errors: "Something went wrong", loading: false })
         );
     }
   };

@@ -6,15 +6,17 @@ import * as actions from "../../actions/auth";
 const HomePage = ({ isAuthenticated, logout }) => (
   <div Style="text-align: center;">
     <h2>Home</h2>
+    <p>
+      This is a website used to track the time records of it's users activity.
+    </p>
     {isAuthenticated ? (
       <div>
-        <button onClick={() => logout()}>Logout</button>
+        <button className="ui blue button" onClick={() => logout()}>
+          Log out »
+        </button>
       </div>
     ) : (
       <div>
-        <p>
-          This is a website used to track the time records of it's users activity.
-        </p>
         <a className="ui blue button" href="/login">
           Login »
         </a>

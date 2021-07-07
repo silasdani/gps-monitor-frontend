@@ -2,23 +2,26 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
+// Account
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
-import DashboardPage from "./components/pages/DashboardPage";
 import SignupPage from "./components/pages/SignupPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
 import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
 import ResetPasswordPage from "./components/pages/ResetPasswordPage";
-import NewTrackPage from "./components/pages/TracksCrud/NewTrackPage";
+//Navigation
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
-import EditTrackPage from "./components/pages/TracksCrud/EditTrackPage";
-
+//Tracks
+import DashboardPage from "./components/pages/DashboardPage";
+import EditTrackPage from "./components/pages//EditTrackPage";
+import NewTrackPage from "./components/pages//NewTrackPage";
 const App = ({ location, isAuthenticated }) => (
   <div>
-    {isAuthenticated && <TopNavigation />}
-    <div className="ui container ui centered form row column padding-reset ui huge message page grid">
+    {<TopNavigation />}
+    <div className="ui container centered
+     row column padding-reset ui medium message page grid">
       <Route location={location} path="/" exact component={HomePage} />
       <Route
         location={location}
@@ -64,7 +67,7 @@ const App = ({ location, isAuthenticated }) => (
       />
       <UserRoute
         location={location}
-        path="/tracks/edit"
+        path="/tracks/edit/:id"
         exact
         component={EditTrackPage}
       />

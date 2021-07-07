@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
 
     return (
       <div>
-        <h1>Login</h1>
+        <h1>Log in</h1>
         <Form onSubmit={this.onSubmit} loading={loading}>
           {errors.global && (
             <Message negative>
@@ -76,7 +76,7 @@ class LoginForm extends React.Component {
               type="password"
               id="password"
               name="password"
-              placeholder="Make it secure"
+              placeholder="password"
               value={data.password}
               onChange={this.onChange}
             />
@@ -92,6 +92,9 @@ class LoginForm extends React.Component {
 
 LoginForm.propTypes = {
   submit: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default LoginForm;

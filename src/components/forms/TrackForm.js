@@ -10,7 +10,7 @@ class TrackForm extends React.Component {
       time: 0,
     },
     loading: false,
-    errors: {}
+    errors: {},
   };
 
   onChange = (e) =>
@@ -24,9 +24,9 @@ class TrackForm extends React.Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.props
-        .submit(this.state.data)
-        .catch((err) => { this.setState({ errors, loading: false }) });
+      this.props.submit(this.state.data).catch(() => {
+        this.setState({ errors, loading: false });
+      });
     }
   };
 
@@ -85,11 +85,11 @@ class TrackForm extends React.Component {
 
 TrackForm.propTypes = {
   submit: PropTypes.func.isRequired,
-  track: PropTypes.shape({
-    date: PropTypes.instanceOf(Date).isRequired,
-    distance: PropTypes.number.isRequired,
-    time: PropTypes.number.isRequired,
-  }).isRequired,
+  // track: PropTypes.shape({
+  //   date: PropTypes.instanceOf(Date).isRequired,
+  //   distance: PropTypes.number.isRequired,
+  //   time: PropTypes.number.isRequired,
+  // }).isRequired,
 };
 
 export default TrackForm;

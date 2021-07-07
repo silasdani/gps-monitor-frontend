@@ -13,7 +13,7 @@ export default {
 
     // DONE
     logout: () => axios.delete("/logout"),
-    
+
     signup: (user) =>
       axios.post("/users", { user }).then((res) => {
         return res.data.data.attributes;
@@ -28,16 +28,22 @@ export default {
     resetPasswordRequest: (email) => axios.post("/password_resets", { email }),
 
     validateToken: (token) => axios.post("/validate_token", { token }),
-    resetPassword: (data) => axios.post("/reset_password", { data }),
+
+    resetPassword: (data) =>
+      axios.post("/password_resets", { data }).then((res) => console.warn(res)),
   },
   tracks: {
-    fetchAll: () => axios.get("/tracks/1").then((res) => res.data.data),
-
-    create: (track) =>
-      axios.post("/tracks", { track }).then((res) => res.data.data),
-    update: (track) =>
-      axios.patch("/tracks/" + track.id).then((res) => res.data.data),
-    delete: (track) =>
-      axios.patch("/tracks/" + track.id).then((res) => res.data.data)
+    fetchAll: () => 
+      axios.get("/tracks/1").then((res) => res.data.data),
+    create: (track) => 
+      axios.post("/tracks", { track }).then((res) => res.data),
+    update: (track, id) =>
+      axios.patch("/tracks/" + id, { track }).then((res) => res.data),
+    delete: (id) =>
+      axios.patch("/tracks/" + id).then((res) => res.data.data),
+  },
+  track: {
+    getData: (id) =>
+      axios.get("/tracks/getData/" + id).then((res) => res.data.data.attributes),
   },
 };
