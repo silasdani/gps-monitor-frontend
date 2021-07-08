@@ -22,7 +22,7 @@ export default {
     // TODO
     confirm: (token) =>
       axios
-        .post("/account_activations", { token })
+        .get("/account_activations/" + token)
         .then((res) => res.data.data.attributes),
     // TODO
     resetPasswordRequest: (email) => axios.post("/password_resets", { email }),
@@ -32,18 +32,23 @@ export default {
     resetPassword: (data) =>
       axios.post("/password_resets", { data }).then((res) => console.warn(res)),
   },
+  users: {
+    fetchAll: () => axios.get("users").then((res) => res.data.data),
+    getData: (id) =>
+      axios.get("users/" + id).then((res) => res.data.data.attributes),
+  },
   tracks: {
-    fetchAll: () => 
-      axios.get("/tracks/1").then((res) => res.data.data),
-    create: (track) => 
-      axios.post("/tracks", { track }).then((res) => res.data),
+    fetchAll: () => axios.get("/tracks/1").then((res) => res.data.data),
+    create: (track) => axios.post("/tracks", { track }).then((res) => res.data),
     update: (track, id) =>
       axios.patch("/tracks/" + id, { track }).then((res) => res.data),
-    delete: (id) =>
-      axios.patch("/tracks/" + id).then((res) => res.data.data),
   },
+
   track: {
     getData: (id) =>
-      axios.get("/tracks/getData/" + id).then((res) => res.data.data.attributes),
+      axios
+        .get("/tracks/getData/" + id)
+        .then((res) => res.data.data.attributes),
+    delete: (id) => axios.delete("/tracks/" + id).then(() => "Sucess`"),
   },
 };

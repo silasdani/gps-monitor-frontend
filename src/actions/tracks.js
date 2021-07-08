@@ -1,4 +1,9 @@
-import { TRACKS_FETCHED, TRACK_CREATED, TRACK_EDITED } from "../types";
+import {
+  TRACKS_FETCHED,
+  TRACK_CREATED,
+  TRACK_EDITED,
+  TRACK_DELETED,
+} from "../types";
 import api from "../api";
 
 const tracksFetched = (data) => ({
@@ -16,6 +21,11 @@ const trackEdited = (data) => ({
   data,
 });
 
+const trackDeleted = (data) => ({
+  type: TRACK_DELETED,
+  data,
+});
+
 export const fetchTracks = () => (dispatch) =>
   api.tracks.fetchAll().then((tracks) => dispatch(tracksFetched(tracks)));
 
@@ -24,3 +34,6 @@ export const createTrack = (data) => (dispatch) =>
 
 export const editTrack = (data, id) => (dispatch) =>
   api.tracks.update(data, id).then((track) => dispatch(trackEdited(track)));
+
+export const deleteTrack = (id) => (dispatch) =>
+  api.track.delete(id).then(() => dispatch(trackDeleted(id)));

@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Image, Button } from "semantic-ui-react";
-import axios from "axios";
 import Momemt from "moment";
 
 function distKM(d) {
@@ -23,11 +22,10 @@ function secondsToHms(d) {
   var sDisplay = s > 0 ? s + (s === 1 ? " second" : " seconds") : "";
   return hDisplay + mDisplay + sDisplay;
 }
-class TracksTable extends React.Component {
+class MyTracksForm extends React.Component {
   state = {
     loading: false,
-    tracks: [],
-    index_track: {},
+    tracks: []
   };
   componentDidMount = () => this.onInit(this.props);
   onInit = () => {
@@ -38,12 +36,9 @@ class TracksTable extends React.Component {
     });
   };
 
-  onDelete = (id) => {
-    this.setState({ loading: true });
-    axios.delete(`/tracks/` + id).then(this.setState({ loading: false }));
+  getId = (id) => {
+    this.setState({ id: id });
   };
-
-  edit = () => {};
 
   render() {
     return (
@@ -82,16 +77,9 @@ class TracksTable extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className ="ui large buttons">
-                  <Button
-                    className="inverted yellow"
-                    href={"/tracks/edit/" + element.id}
-                  >
-                    Edit
-                  </Button>
-                  <div className="or"></div>
-                  <Button className="inverted red" onClick={this.onDelete}>
-                    Delete
+                <div className="ui large buttons">
+                  <Button secondary href={"/tracks/edit/" + element.id}>
+                    Edit/Delete
                   </Button>
                 </div>
               </Card.Content>
@@ -103,4 +91,4 @@ class TracksTable extends React.Component {
   }
 }
 
-export default TracksTable;
+export default MyTracksForm;

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
-// Account
+// Accocount
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import SignupPage from "./components/pages/SignupPage";
@@ -17,6 +17,10 @@ import TopNavigation from "./components/navigation/TopNavigation";
 import DashboardPage from "./components/pages/DashboardPage";
 import EditTrackPage from "./components/pages//EditTrackPage";
 import NewTrackPage from "./components/pages//NewTrackPage";
+//Users
+import AllUsersPage from "./components/pages/AllUsersPage";
+import EditUserPage from "./components/pages/EditUserPage";
+
 const App = ({ location, isAuthenticated }) => (
   <div>
     {<TopNavigation />}
@@ -70,6 +74,18 @@ const App = ({ location, isAuthenticated }) => (
         path="/tracks/edit/:id"
         exact
         component={EditTrackPage}
+      />
+      <UserRoute
+        location={location}
+        path="/users"
+        exact
+        component={AllUsersPage}
+      />
+      <UserRoute
+        location={location}
+        path="/users/:id"
+        exact
+        component={EditUserPage}
       />
     </div>
   </div>

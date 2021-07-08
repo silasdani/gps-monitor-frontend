@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
 import { fetchTracks } from "../../actions/tracks";
-import TracksTable from "../tables/TracksTable";
+import MyTracksForm from "../forms/MyTracksForm";
 
 class DashboardPage extends React.Component {
   submit = () => 
@@ -13,8 +13,9 @@ class DashboardPage extends React.Component {
     const { isConfirmed, records } = this.props;
     return (
       <div>
+        <h1>My Tracks</h1>
         {!isConfirmed && <ConfirmEmailMessage />}
-        <TracksTable submit={this.submit} tracks={records}/>
+        <MyTracksForm submit={this.submit} tracks={records}/>
       </div>
     );
   }

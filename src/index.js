@@ -26,6 +26,7 @@ if (localStorage.token) {
     email: localStorage.email,
     activated: localStorage.confirmed,
     admin: localStorage.admin,
+    manager: localStorage.manager,
     name: localStorage.name,
   };
 
