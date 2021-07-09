@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Segment, Button } from "semantic-ui-react";
-import { editUser, deleteUser} from "../../actions/users";
+import { Button } from "semantic-ui-react";
+import { editUser, deleteUser } from "../../actions/users";
 import EditDeleteUserForm from "../forms/EditDeleteUserForm";
 
 class EditUserPage extends React.Component {
@@ -19,13 +19,13 @@ class EditUserPage extends React.Component {
   render() {
     const id = this.props.match.params.id;
     return (
-      <Segment>
+      <div>
         <h1>User #{id}</h1>
         <EditDeleteUserForm submit={this.submit} id={id} />
         <Button negative onClick={this.delete}>
           Delete
         </Button>
-      </Segment>
+      </div>
     );
   }
 }
@@ -41,6 +41,5 @@ EditUserPage.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
-
 
 export default connect(null, { editUser, deleteUser })(EditUserPage);

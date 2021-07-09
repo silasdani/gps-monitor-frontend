@@ -46,6 +46,7 @@ export default {
     create: (track) => axios.post("/tracks", { track }).then((res) => res.data),
     update: (track, id) =>
       axios.patch("/tracks/" + id, { track }).then((res) => res.data),
+    fetch: () => axios.get("/tracks").then((res) => res.data.data),
   },
 
   track: {

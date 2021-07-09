@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Segment, Button } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { editTrack, deleteTrack } from "../../actions/tracks";
 import EditForm from "../forms/EditDeleteTrackForm";
 
@@ -19,13 +19,13 @@ class EditTrackPage extends React.Component {
   render() {
     const id = this.props.match.params.id;
     return (
-      <Segment>
+      <div>
         <h1>Track #{id}</h1>
         <EditForm submit={this.submit} id={id} />
         <Button negative onClick={this.delete}>
           Delete
         </Button>
-      </Segment>
+      </div>
     );
   }
 }

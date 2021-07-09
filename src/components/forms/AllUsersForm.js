@@ -25,7 +25,7 @@ class AllUsersForm extends React.Component {
                 <Image
                   floated="right"
                   size="small"
-                  src={"https://i.pravatar.cc/150?u=" + element.attributes.name}
+                  src={"https://i.pravatar.cc/150?u=" + element.id}
                 />
                 <Card.Header> {element.attributes.name}</Card.Header>
                 <Card.Description>
@@ -40,11 +40,11 @@ class AllUsersForm extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className="ui large buttons">
-                  <Button secondary href={"/users/edit/" + element.id}>
-                    Edit/Delete
+
+                  <Button circular href={"/users/edit/" + element.id}>
+                   <i className="icon settings"></i> SETTINGS
                   </Button>
-                </div>
+          
               </Card.Content>
             </Card>
           ))}

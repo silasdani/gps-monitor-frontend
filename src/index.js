@@ -23,6 +23,7 @@ if (localStorage.token) {
 
   const user = {
     remember_digest: localStorage.token,
+    id: localStorage.id,
     email: localStorage.email,
     activated: localStorage.confirmed,
     admin: localStorage.admin,

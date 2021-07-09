@@ -1,58 +1,80 @@
 import React from "react";
 import { Card, Image, Button } from "semantic-ui-react";
 import Momemt from "moment";
+import sub from "../../utils/subprograms";
+import { Form, Grid, GridColumn } from "semantic-ui-react";
 
-function distKM(d) {
-  return d.toFixed(2) + " Km";
-}
-
-function averageSpeed(dist, h) {
-  var x = (dist * 3600) / h;
-  return x.toFixed(2) + " Km/h";
-}
-
-function secondsToHms(d) {
-  d = Number(d);
-  var h = Math.floor(d / 3600);
-  var m = Math.floor((d % 3600) / 60);
-  var s = Math.floor((d % 3600) % 60);
-
-  var hDisplay = h > 0 ? h + (h === 1 ? " hour, " : " hours, ") : "";
-  var mDisplay = m > 0 ? m + (m === 1 ? " minute, " : " minutes, ") : "";
-  var sDisplay = s > 0 ? s + (s === 1 ? " second" : " seconds") : "";
-  return hDisplay + mDisplay + sDisplay;
-}
 class MyTracksForm extends React.Component {
   state = {
+    data: {
+      dateFrom: "2021-05-07T00:00",
+      dateTo: "2021-12-12T12:00",
+    },
     loading: false,
-    tracks: []
+    tracks: [],
   };
   componentDidMount = () => this.onInit(this.props);
   onInit = () => {
     this.setState({ loading: true });
     this.props.submit().then(() => {
-      this.setState({ loading: false });
-      this.setState({ tracks: Object.values(this.props.tracks) });
+      this.setState({ loading: false, tracks: this.props.tracks });
     });
   };
 
-  getId = (id) => {
-    this.setState({ id: id });
+  onChange = (e) => {
+    this.setState({
+      ...this.state,
+      data: { ...this.state.data, [e.target.name]: e.target.value },
+      tracks: sub.tracks.filterTracksByDate(this.props.tracks, this.state.data),
+    });
   };
 
   render() {
+    const { data, loading } = this.state;
     return (
       <div className="ui container">
+        <Form loading={loading}>
+          <Grid centered>
+            <GridColumn width={6}>
+              <Form.Field>
+                <label htmlFor="date">From date</label>
+                <input
+                  type="datetime-local"
+                  id="dateTo"
+                  name="dateFrom"
+                  value={data.dateFrom}
+                  onChange={this.onChange}
+                />
+              </Form.Field>
+            </GridColumn>
+            <GridColumn width={6}>
+              <Form.Field>
+                <label htmlFor="date">To date</label>
+                <input
+                  type="datetime-local"
+                  id="dateTo"
+                  name="dateTo"
+                  value={data.dateTo}
+                  onChange={this.onChange}
+                />
+              </Form.Field>
+            </GridColumn>
+          </Grid>
+        </Form>
+
         <Card.Group className="centered">
           {this.state.tracks.map((element) => (
             <Card>
               <Card.Content textAlign="left">
                 <Image
+                  circular
                   floated="right"
-                  size="small"
-                  src={"https://i.pravatar.cc/150?u=" + localStorage.name}
+                  size="mini"
+                  src={
+                    "https://i.pravatar.cc/150?u=" + element.attributes.user_id
+                  }
                 />
-                <Card.Header>{localStorage.name}</Card.Header>
+                <Card.Header>User: #{element.attributes.user_id}</Card.Header>
                 <Card.Meta>
                   {Momemt(element.attributes.date).format(
                     "MMM Do YYYY, h:mm a"
@@ -61,15 +83,15 @@ class MyTracksForm extends React.Component {
                 <Card.Description>
                   <p>
                     <strong>Distance: </strong>
-                    {distKM(element.attributes.distance)}
+                    {sub.track.distKM(element.attributes.distance)}
                   </p>
                   <p>
                     <strong>Time: </strong>
-                    {secondsToHms(element.attributes.time)}
+                    {sub.track.secondsToHms(element.attributes.time)}
                   </p>
                   <p>
                     <strong>Average speed: </strong>
-                    {averageSpeed(
+                    {sub.track.averageSpeed(
                       element.attributes.distance,
                       element.attributes.time
                     )}
@@ -77,11 +99,9 @@ class MyTracksForm extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <div className="ui large buttons">
-                  <Button secondary href={"/tracks/edit/" + element.id}>
-                    Edit/Delete
-                  </Button>
-                </div>
+                <Button circular href={"/tracks/edit/" + element.id}>
+                  <i className="icon settings"></i> SETTINGS
+                </Button>
               </Card.Content>
             </Card>
           ))}

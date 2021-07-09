@@ -74,7 +74,7 @@ class EditDeleteTrackForm extends React.Component {
     const { errors, data, loading } = this.state;
     const isAdmin = this.props.isAdmin;
     return (
-      <Form onSubmit={this.onSubmit} loading={loading}>
+      <Form onSubmit={this.onSubmit} loading={loading} >
         <Form.Field>
           <label htmlFor="name">Name</label>
           <input

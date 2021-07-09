@@ -13,7 +13,9 @@ class AllUsersPage extends React.Component {
     return (
       <div>
         <h1>All Users</h1>
-        {isManagerOrAdmin && <AllUsersForm submit={this.submit} users={usersAll} />}
+        {isManagerOrAdmin && (
+          <AllUsersForm submit={this.submit} users={usersAll} />
+        )}
       </div>
     );
   }
@@ -24,7 +26,7 @@ AllUsersPage.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log(state)
+  console.log(state);
   return {
     isManagerOrAdmin: !!state.user.manager || !!state.user.admin,
     usersAll: state.users,

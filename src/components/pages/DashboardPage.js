@@ -4,11 +4,10 @@ import { connect } from "react-redux";
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
 import { fetchTracks } from "../../actions/tracks";
 import MyTracksForm from "../forms/MyTracksForm";
-import SearchTracksForm from "../forms/SearchTracksForm";
 
 class DashboardPage extends React.Component {
-  submit = () => 
-  this.props.fetchTracks().then(() => this.props.history.push("/dashboard"));
+  submit = () =>
+    this.props.fetchTracks().then(() => this.props.history.push("/dashboard"));
 
   render() {
     const { isConfirmed, records } = this.props;
@@ -16,11 +15,8 @@ class DashboardPage extends React.Component {
       <div>
         <h1>My Tracks</h1>
         {!isConfirmed && <ConfirmEmailMessage />}
-        
-        <SearchTracksForm />
 
-
-        <MyTracksForm submit={this.submit} tracks={records}/>
+        <MyTracksForm submit={this.submit} tracks={records} />
       </div>
     );
   }
@@ -28,13 +24,13 @@ class DashboardPage extends React.Component {
 
 DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
-  records: PropTypes.object.isRequired
+  records: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     isConfirmed: !!state.user.activated,
-    records: state.tracks
+    records: Object.values(state.tracks),
   };
 }
 

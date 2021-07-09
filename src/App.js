@@ -20,12 +20,12 @@ import NewTrackPage from "./components/pages//NewTrackPage";
 //Users
 import AllUsersPage from "./components/pages/AllUsersPage";
 import EditUserPage from "./components/pages/EditUserPage";
+import AllTracksPage from "./components/pages/AllTracksPage";
 
 const App = ({ location, isAuthenticated }) => (
   <div>
     {<TopNavigation />}
-    <div className="ui container centered
-     row column padding-reset ui medium message page grid">
+    <div className="ui container row column padding-reset medium message page grid centered ">
       <Route location={location} path="/" exact component={HomePage} />
       <Route
         location={location}
@@ -86,6 +86,13 @@ const App = ({ location, isAuthenticated }) => (
         path="/users/edit/:id"
         exact
         component={EditUserPage}
+      />
+
+      <UserRoute
+        location={location}
+        path="/tracks/all"
+        exact
+        component={AllTracksPage}
       />
     </div>
   </div>

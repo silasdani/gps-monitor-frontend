@@ -28,6 +28,12 @@ const TopNavigation = ({ user, logout, home, isAuthenticated }) => (
         <Menu.Item as={Link} to="/tracks/new">
           Add New Track
         </Menu.Item>
+
+        {user.admin && (
+          <Menu.Item as={Link} to="/tracks/all">
+            Manage All Tracks
+          </Menu.Item>
+        )}
         {(user.admin || user.manager) && (
           <Menu.Item as={Link} to="/users">
             Manage Users
@@ -44,7 +50,7 @@ const TopNavigation = ({ user, logout, home, isAuthenticated }) => (
               className="circular"
               floated="right"
               size="mini"
-              src={"https://i.pravatar.cc/150?u=" + localStorage.name}
+              src={"https://i.pravatar.cc/150?u=" + user.id}
             />
           }
         >

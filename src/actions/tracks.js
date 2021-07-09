@@ -29,6 +29,9 @@ const trackDeleted = (data) => ({
 export const fetchTracks = () => (dispatch) =>
   api.tracks.fetchAll().then((tracks) => dispatch(tracksFetched(tracks)));
 
+export const fetchAllTracks = () => (dispatch) =>
+  api.tracks.fetch().then((tracks) => dispatch(tracksFetched(tracks)));
+
 export const createTrack = (data) => (dispatch) =>
   api.tracks.create(data).then((track) => dispatch(trackCreated(track)));
 
