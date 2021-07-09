@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
 import { fetchTracks } from "../../actions/tracks";
 import MyTracksForm from "../forms/MyTracksForm";
+import SearchTracksForm from "../forms/SearchTracksForm";
 
 class DashboardPage extends React.Component {
   submit = () => 
@@ -15,6 +16,10 @@ class DashboardPage extends React.Component {
       <div>
         <h1>My Tracks</h1>
         {!isConfirmed && <ConfirmEmailMessage />}
+        
+        <SearchTracksForm />
+
+
         <MyTracksForm submit={this.submit} tracks={records}/>
       </div>
     );

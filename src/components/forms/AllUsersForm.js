@@ -11,7 +11,6 @@ class AllUsersForm extends React.Component {
     this.setState({ loading: true });
     this.props.submit().then(() => {
       this.setState({ loading: false });
-      console.warn(this.props);
       this.setState({ loading: false, users: Object.values(this.props.users) });
     });
   };

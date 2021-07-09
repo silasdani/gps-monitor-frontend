@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Form, Button } from "semantic-ui-react";
 import InlineError from "../messages/InlineError";
 import api from "../../api";
+import { connect } from "react-redux";
 class EditDeleteTrackForm extends React.Component {
   state = {
     data: {
@@ -11,8 +12,6 @@ class EditDeleteTrackForm extends React.Component {
       admin: false,
       manager: false,
       activated: true,
-      password_digest: "",
-      remember_digest: "",
     },
     loading: false,
     errors: {},
@@ -21,7 +20,14 @@ class EditDeleteTrackForm extends React.Component {
   componentDidMount() {
     const id = this.props.id;
     this.setState({ loading: true });
-    api.users.getData(id).then((data) => {
+    api.users.getData(id).then((res) => {
+      var data = {
+        name: res.name,
+        email: res.email,
+        admin: res.admin,
+        manager: res.manager,
+        activated: res.activated,
+      };
       this.setState({ loading: false, data });
     });
   }
@@ -32,11 +38,21 @@ class EditDeleteTrackForm extends React.Component {
       data: { ...this.state.data, [e.target.name]: e.target.value },
     });
 
+  onChangeForBoolean = (e) =>
+    this.setState({
+      ...this.state,
+      data: {
+        ...this.state.data,
+        [e.target.name]: e.target.checked ? true : false,
+      },
+    });
+
   onSubmit = () => {
     const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
+
       this.props
         .submit(this.state.data)
         .catch(() => this.setState({ loading: false }));
@@ -46,18 +62,17 @@ class EditDeleteTrackForm extends React.Component {
   validate = (data) => {
     const errors = {};
     if (data.name === "") errors.name = "Name can't be blank";
-    if (data.admin !== false || data.admin !== true)
-      errors.admin = "Field is not a boolean";
-    if (data.manager !== false || data.manager !== true)
-      errors.manager = "Field is not a boolean";
-    if (data.activated !== false || data.activated !== true)
-      errors.activated = "Field is not a boolean";
+    if (data.admin === true && data.manager === true) {
+      errors.manager = "User must be either an manager or a administrator";
+      errors.admin = "User must be either an administrator or a manager";
+    }
+
     return errors;
   };
 
   render() {
     const { errors, data, loading } = this.state;
-
+    const isAdmin = this.props.isAdmin;
     return (
       <Form onSubmit={this.onSubmit} loading={loading}>
         <Form.Field>
@@ -70,10 +85,10 @@ class EditDeleteTrackForm extends React.Component {
             onChange={this.onChange}
           />
         </Form.Field>
-        {errors.name && <InlineError text={errors.name}/>}
+        {errors.name && <InlineError text={errors.name} />}
 
         <Form.Field>
-          <label htmlFor="email">Name</label>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
             id="email"
@@ -83,55 +98,46 @@ class EditDeleteTrackForm extends React.Component {
           />
         </Form.Field>
 
-        <Form.Field>
-          <label htmlFor="float">Distance (Km)</label>
-          <input
-            type="number"
-            id="distance"
-            name="distance"
-            placeholder="km"
-            value={data.distance}
-            onChange={this.onChange}
-          />
-          {errors.distance && <InlineError text={errors.distance} />}
-        </Form.Field>
-
-        <Form.Field>
-          <label htmlFor="admin">Admin</label>
-          <input
-            type="boolean"
-            id="admin"
-            name="admin"
-            value={data.admin}
-            onChange={this.onChange}
-          />
-          {errors.admin && <InlineError text={errors.admin} />}
-        </Form.Field>
+        {isAdmin && (
+          <Form.Field>
+            <label htmlFor="admin">Admin</label>
+            <input
+              type="checkbox"
+              id="admin"
+              name="admin"
+              checked={data.admin ? "checked" : ""}
+              onChange={this.onChangeForBoolean}
+            />
+            <br />
+            {errors.admin && <InlineError text={errors.admin} />}
+          </Form.Field>
+        )}
 
         <Form.Field>
           <label htmlFor="manager">Manager</label>
           <input
-            type="boolean"
+            type="checkbox"
             id="manager"
             name="manager"
-            value={data.manager}
-            onChange={this.onChange}
+            checked={data.manager ? "checked" : ""}
+            onChange={this.onChangeForBoolean}
           />
+          <br />
           {errors.manager && <InlineError text={errors.manager} />}
         </Form.Field>
 
         <Form.Field>
           <label htmlFor="activated">Activated</label>
           <input
-            type="boolean"
+            type="checkbox"
             id="activated"
             name="activated"
-            value={data.activated}
-            onChange={this.onChange}
+            checked={data.activated ? "checked" : ""}
+            onChange={this.onChangeForBoolean}
           />
+          <br />
           {errors.activated && <InlineError text={errors.activated} />}
         </Form.Field>
-
 
         <Button primary>Update</Button>
       </Form>
@@ -144,4 +150,10 @@ EditDeleteTrackForm.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default EditDeleteTrackForm;
+function mapStateToProps(state) {
+  return {
+    isAdmin: state.user.admin ==="true" ? true : false
+  };
+}
+
+export default connect(mapStateToProps)(EditDeleteTrackForm);

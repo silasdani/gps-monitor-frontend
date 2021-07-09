@@ -17,14 +17,12 @@ class EditDeleteTrackForm extends React.Component {
 
   componentDidMount() {
     const id = this.props.id;
-    console.warn("Edit active on " + this.props.id);
     this.setState({ loading: true });
     api.track
       .getData(id)
       .then(
         (data) => {
           (data.date = moment(data.date).format("yyyy-MM-DDThh:mm"));
-          console.warn(data.date);
           this.setState({ loading: false, data })
         }
       );

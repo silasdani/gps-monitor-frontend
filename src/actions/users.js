@@ -29,13 +29,13 @@ export const signup = (data) => (dispatch) =>
   });
 
 export const addUser = (data) => (dispatch) =>
-  api.user.addUser(data).then(dispatch(userFetched(data)));
+  api.users.addUser(data).then(dispatch(userFetched(data)));
 
-export const deleteUser = (data) => (dispatch) =>
-  api.user.removeUser(data).then(dispatch(userDeleted(data)));
+export const deleteUser = (id) => (dispatch) =>
+  api.users.removeUser(id).then((id) => dispatch(userDeleted(id)));
 
-export const editUser = (data) => (dispatch) =>
-  api.user.editUser(data).then(dispatch(userEdited(data)));
+export const editUser = (user, id) => (dispatch) =>
+  api.users.editUser(user, id).then((data) => dispatch(userEdited(data)));
 
 export const fetchUsers = () => (dispatch) =>
   api.users.fetchAll().then((data) => dispatch(usersFetched(data)));

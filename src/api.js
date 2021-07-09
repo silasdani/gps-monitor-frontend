@@ -35,7 +35,11 @@ export default {
   users: {
     fetchAll: () => axios.get("users").then((res) => res.data.data),
     getData: (id) =>
-      axios.get("users/" + id).then((res) => res.data.data.attributes),
+      axios.get("/users/" + id).then((res) => res.data.data.attributes),
+    removeUser: (id) => axios.delete("/users/" + id).then(() => "success"),
+
+    editUser: (user, id) =>
+      axios.patch("/users/" + id, { user }).then((res) => res.data),
   },
   tracks: {
     fetchAll: () => axios.get("/tracks/1").then((res) => res.data.data),

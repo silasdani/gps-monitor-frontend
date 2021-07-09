@@ -13,7 +13,7 @@ export default function tracks(state = {}, action = {}) {
     case TRACK_CREATED:
     case TRACK_EDITED:
     case TRACK_DELETED:
-      return { ...state };
+      return { ...state, ...action.data };
 
     default:
       return state;

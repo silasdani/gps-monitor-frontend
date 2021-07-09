@@ -83,7 +83,7 @@ const App = ({ location, isAuthenticated }) => (
       />
       <UserRoute
         location={location}
-        path="/users/:id"
+        path="/users/edit/:id"
         exact
         component={EditUserPage}
       />

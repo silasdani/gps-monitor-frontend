@@ -29,7 +29,6 @@ class SignupForm extends React.Component {
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props.submit(this.state.data).catch((err) => {
-        console.warn(err);
         this.setState({ errors: err.data.data.error, loading: false });
       });
     }
@@ -40,9 +39,11 @@ class SignupForm extends React.Component {
 
     if (!isEmail(data.email)) errors.email = "Invalid email";
     if (!data.password) errors.password = "Can't be blank";
+    if (data.password.length < 6)
+      errors.password = "Al least 6 characters required";
     if (data.password !== data.password_confirmation)
-      errors.password = "Passwords do not match";
-    if(!data.name) errors.name = "Can't be blank";
+      errors.password_confirmation = "Passwords do not match";
+    if (!data.name) errors.name = "Can't be blank";
 
     return errors;
   };
@@ -53,63 +54,63 @@ class SignupForm extends React.Component {
     return (
       <div>
         <h1>Sign up</h1>
-      <Form onSubmit={this.onSubmit} loading={loading}>
-        <Form.Field error={!!errors.name}>
-          <label htmlFor="text">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
-            value={data.name}
-            onChange={this.onChange}
-          />
-          {errors.name && <InlineError text={errors.name} />}
-        </Form.Field>
+        <Form onSubmit={this.onSubmit} loading={loading}>
+          <Form.Field error={!!errors.name}>
+            <label htmlFor="text">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Name"
+              value={data.name}
+              onChange={this.onChange}
+            />
+            {errors.name && <InlineError text={errors.name} />}
+          </Form.Field>
 
-        <Form.Field error={!!errors.email}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="email@email.com"
-            value={data.email}
-            onChange={this.onChange}
-          />
-          {errors.email && <InlineError text={errors.email} />}
-        </Form.Field>
+          <Form.Field error={!!errors.email}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="email@email.com"
+              value={data.email}
+              onChange={this.onChange}
+            />
+            {errors.email && <InlineError text={errors.email} />}
+          </Form.Field>
 
-        <Form.Field error={!!errors.password}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={data.password}
-            placeholder="at least 6 characters"
-            onChange={this.onChange}
-          />
-          {errors.password && <InlineError text={errors.password} />}
-        </Form.Field>
+          <Form.Field error={!!errors.password}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={data.password}
+              placeholder="at least 6 characters"
+              onChange={this.onChange}
+            />
+            {errors.password && <InlineError text={errors.password} />}
+          </Form.Field>
 
-        <Form.Field error={!!errors.password_confirmation}>
-          <label htmlFor="password">Password confirmation</label>
-          <input
-            type="password"
-            id="password_confirmation"
-            name="password_confirmation"
-            value={data.password_confirmation}
-            placeholder="re-enter password"
-            onChange={this.onChange}
-          />
-          {errors.password_confirmation && (
-            <InlineError text={errors.password_confirmation} />
-          )}
-        </Form.Field>
+          <Form.Field error={!!errors.password_confirmation}>
+            <label htmlFor="password">Password confirmation</label>
+            <input
+              type="password"
+              id="password_confirmation"
+              name="password_confirmation"
+              value={data.password_confirmation}
+              placeholder="re-enter password"
+              onChange={this.onChange}
+            />
+            {errors.password_confirmation && (
+              <InlineError text={errors.password_confirmation} />
+            )}
+          </Form.Field>
 
-        <Button primary>Sign Up</Button>
-      </Form>
+          <Button primary>Sign Up</Button>
+        </Form>
       </div>
     );
   }
