@@ -27,7 +27,9 @@ class AllUsersForm extends React.Component {
                   size="small"
                   src={"https://i.pravatar.cc/150?u=" + element.id}
                 />
-                <Card.Header> {element.attributes.name}</Card.Header>
+                <Card.Header>
+                  #{element.id} <br /> {element.attributes.name}
+                </Card.Header>
                 <Card.Description>
                   <p>
                     <strong>Id: #</strong>
@@ -40,11 +42,9 @@ class AllUsersForm extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-
-                  <Button circular href={"/users/edit/" + element.id}>
-                   <i className="icon settings"></i> SETTINGS
-                  </Button>
-          
+                <Button circular positive href={"/users/edit/" + element.id}>
+                  <i className="icon settings"></i> SETTINGS
+                </Button>
               </Card.Content>
             </Card>
           ))}

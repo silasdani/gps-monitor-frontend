@@ -47,6 +47,8 @@ export default {
     update: (track, id) =>
       axios.patch("/tracks/" + id, { track }).then((res) => res.data),
     fetch: () => axios.get("/tracks").then((res) => res.data.data),
+    weekly_report: () =>
+      axios.get("/tracks/weekly_report").then((res) => res.data),
   },
 
   track: {

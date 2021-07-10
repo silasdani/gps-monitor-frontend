@@ -34,7 +34,6 @@ export const logout = () => (dispatch) =>
 
 export const confirm = (token) => (dispatch) =>
   api.user.confirm(token).then((user) => {
-    localStorage.token = user.remember_digest;
     dispatch(userLoggedIn(user));
   });
 

@@ -24,7 +24,6 @@ const userEdited = (data) => ({
 
 export const signup = (data) => (dispatch) =>
   api.user.signup(data).then((user) => {
-    localStorage.token = user.remember_digest;
     dispatch(userLoggedIn(user));
   });
 

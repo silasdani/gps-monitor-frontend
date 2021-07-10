@@ -21,15 +21,20 @@ import NewTrackPage from "./components/pages//NewTrackPage";
 import AllUsersPage from "./components/pages/AllUsersPage";
 import EditUserPage from "./components/pages/EditUserPage";
 import AllTracksPage from "./components/pages/AllTracksPage";
+import WeeklyReportPage from "./components/pages/WeeklyReportPage";
 
-const App = ({ location, isAuthenticated }) => (
-  <div>
+const App = ({ location }) => (
+ 
+  <div >
     {<TopNavigation />}
-    <div className="ui container row column padding-reset medium message page grid centered ">
+    <div
+      Style="background-color: #FFFFCC;"
+      className="ui container row column padding-reset medium message page grid centered "
+    >
       <Route location={location} path="/" exact component={HomePage} />
       <Route
         location={location}
-        path="/confirmation/:token"
+        path={"/confirmation/:token/:action"}
         exact
         component={ConfirmationPage}
       />
@@ -94,6 +99,13 @@ const App = ({ location, isAuthenticated }) => (
         exact
         component={AllTracksPage}
       />
+
+      <UserRoute
+        location={location}
+        path="/weekly"
+        exact
+        component={WeeklyReportPage}
+      />
     </div>
   </div>
 );
@@ -105,10 +117,5 @@ App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    isAuthenticated: !!state.user.remember_digest,
-  };
-}
 
-export default connect(mapStateToProps)(App);
+export default connect()(App);

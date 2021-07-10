@@ -22,7 +22,7 @@ class EditUserPage extends React.Component {
       <div>
         <h1>User #{id}</h1>
         <EditDeleteUserForm submit={this.submit} id={id} />
-        <Button negative onClick={this.delete}>
+        <Button disabled={id===localStorage.id} negative onClick={this.delete}>
           Delete
         </Button>
       </div>

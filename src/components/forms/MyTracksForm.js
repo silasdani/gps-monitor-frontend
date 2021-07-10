@@ -64,7 +64,7 @@ class MyTracksForm extends React.Component {
 
         <Card.Group className="centered">
           {this.state.tracks.map((element) => (
-            <Card>
+            <Card key={element.id}>
               <Card.Content textAlign="left">
                 <Image
                   circular
@@ -99,7 +99,7 @@ class MyTracksForm extends React.Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra>
-                <Button circular href={"/tracks/edit/" + element.id}>
+                <Button circular positive href={"/tracks/edit/" + element.id}>
                   <i className="icon settings"></i> SETTINGS
                 </Button>
               </Card.Content>

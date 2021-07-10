@@ -26,7 +26,6 @@ AllUsersPage.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     isManagerOrAdmin: !!state.user.manager || !!state.user.admin,
     usersAll: state.users,

@@ -8,10 +8,15 @@ import * as actions from "../../actions/auth";
 const TopNavigation = ({ user, logout, home, isAuthenticated }) => (
   <Menu pointing>
     {
-      <Menu.Item className="active item" as={Link} to={home}>
+      <Menu.Item className="active item red" as={Link} to={home}>
         Jogging App
       </Menu.Item>
     }
+    {isAuthenticated && (
+      <Menu.Item as={Link} to="/weekly">
+        Weekly Report
+      </Menu.Item>
+    )}
     {!isAuthenticated && (
       <Menu.Menu position="right">
         <Menu.Item as={Link} to="/login">
@@ -64,9 +69,6 @@ const TopNavigation = ({ user, logout, home, isAuthenticated }) => (
 );
 
 TopNavigation.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }).isRequired,
   logout: PropTypes.func.isRequired,
   home: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,

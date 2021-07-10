@@ -8,12 +8,17 @@ import { confirm } from "../../actions/auth";
 class AllUsersPage extends React.Component {
   state = {
     loading: true,
-    success: false
+    success: false,
   };
 
   componentDidMount() {
+    var link =
+      this.props.match.params.token +
+      "/" +
+      this.props.match.params.action +
+      this.props.location.search;
     this.props
-      .confirm(this.props.match.params.token)
+      .confirm(link)
       .then(() => this.setState({ loading: false, success: true }))
       .catch(() => this.setState({ loading: false, success: false }));
   }
@@ -30,8 +35,7 @@ class AllUsersPage extends React.Component {
           </Message>
         )}
 
-        {!loading &&
-        success && (
+        {!loading && success && (
           <Message success icon>
             <Icon name="checkmark" />
             <Message.Content>
@@ -43,8 +47,7 @@ class AllUsersPage extends React.Component {
           </Message>
         )}
 
-        {!loading &&
-        !success && (
+        {!loading && !success && (
           <Message negative icon>
             <Icon name="warning sign" />
             <Message.Content>
@@ -61,9 +64,9 @@ AllUsersPage.propTypes = {
   confirm: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      token: PropTypes.string.isRequired
-    }).isRequired
-  }).isRequired
+      token: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default connect(null, { confirm })(AllUsersPage);
