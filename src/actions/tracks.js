@@ -27,10 +27,10 @@ const trackDeleted = (data) => ({
 });
 
 export const fetchTracks = () => (dispatch) =>
-  api.tracks.fetchAll().then((tracks) => dispatch(tracksFetched(tracks)));
+  api.tracks.fetchMyTracks().then((tracks) => dispatch(tracksFetched(tracks)));
 
 export const fetchAllTracks = () => (dispatch) =>
-  api.tracks.fetch().then((tracks) => dispatch(tracksFetched(tracks)));
+  api.tracks.fetchAll().then((tracks) => dispatch(tracksFetched(tracks)));
 
 export const createTrack = (data) => (dispatch) =>
   api.tracks.create(data).then((track) => dispatch(trackCreated(track)));
@@ -39,4 +39,4 @@ export const editTrack = (data, id) => (dispatch) =>
   api.tracks.update(data, id).then((track) => dispatch(trackEdited(track)));
 
 export const deleteTrack = (id) => (dispatch) =>
-  api.track.delete(id).then(() => dispatch(trackDeleted(id)));
+  api.tracks.delete(id).then(() => dispatch(trackDeleted(id)));

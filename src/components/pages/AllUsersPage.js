@@ -23,6 +23,11 @@ class AllUsersPage extends React.Component {
 
 AllUsersPage.propTypes = {
   isManagerOrAdmin: PropTypes.bool.isRequired,
+  usersAll: PropTypes.array.isRequired,
+  fetchUsers: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 function mapStateToProps(state) {

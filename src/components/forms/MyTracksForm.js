@@ -7,17 +7,19 @@ import { Form, Grid, GridColumn } from "semantic-ui-react";
 class MyTracksForm extends React.Component {
   state = {
     data: {
-      dateFrom: "2021-05-07T00:00",
-      dateTo: "2021-12-12T12:00",
+      dateFrom: "2021-06-07T00:00",
+      dateTo: "2021-07-13T12:00",
     },
     loading: false,
     tracks: [],
   };
-  componentDidMount = () => this.onInit(this.props);
-  onInit = () => {
+  componentDidMount = () => {
     this.setState({ loading: true });
     this.props.submit().then(() => {
-      this.setState({ loading: false, tracks: this.props.tracks });
+      this.setState({
+        loading: false,
+        tracks: this.props.tracks,
+      });
     });
   };
 
@@ -64,7 +66,7 @@ class MyTracksForm extends React.Component {
 
         <Card.Group className="centered">
           {this.state.tracks.map((element) => (
-            <Card key={element.id}>
+            <Card>
               <Card.Content textAlign="left">
                 <Image
                   circular
@@ -83,7 +85,7 @@ class MyTracksForm extends React.Component {
                 <Card.Description>
                   <p>
                     <strong>Distance: </strong>
-                    {sub.track.distKM(element.attributes.distance)}
+                    {element.attributes.distance} Km
                   </p>
                   <p>
                     <strong>Time: </strong>
@@ -91,10 +93,7 @@ class MyTracksForm extends React.Component {
                   </p>
                   <p>
                     <strong>Average speed: </strong>
-                    {sub.track.averageSpeed(
-                      element.attributes.distance,
-                      element.attributes.time
-                    )}
+                    {element.attributes.av_speed} Km/h
                   </p>
                 </Card.Description>
               </Card.Content>

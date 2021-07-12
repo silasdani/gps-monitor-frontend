@@ -25,6 +25,10 @@ class DashboardPage extends React.Component {
 DashboardPage.propTypes = {
   isConfirmed: PropTypes.bool.isRequired,
   records: PropTypes.object.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  fetchTracks: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {

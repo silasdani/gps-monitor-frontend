@@ -20,14 +20,13 @@ const store = createStore(
 
 if (localStorage.token) {
   // const payload = decode(localStorage.token);
-
   const user = {
     remember_digest: localStorage.token,
     id: localStorage.id,
     email: localStorage.email,
-    activated: localStorage.confirmed,
-    admin: localStorage.admin,
-    manager: localStorage.manager,
+    activated: localStorage.confirmed === "true" ? true : false,
+    admin: localStorage.admin === "true" ? true : false,
+    manager: localStorage.manager === "true" ? true : false,
     name: localStorage.name,
   };
 

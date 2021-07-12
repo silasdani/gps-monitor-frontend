@@ -37,9 +37,10 @@ EditTrackPage.propTypes = {
     }).isRequired,
   }).isRequired,
   editTrack: PropTypes.func.isRequired,
+  deleteTrack: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default connect(null, { editTrack, deleteTrack })(EditTrackPage);
+export default connect({ editTrack, deleteTrack })(EditTrackPage);

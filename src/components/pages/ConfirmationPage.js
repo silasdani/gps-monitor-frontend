@@ -65,7 +65,11 @@ AllUsersPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       token: PropTypes.string.isRequired,
+      action: PropTypes.string.isRequired
     }).isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+      search: PropTypes.string.isRequired
   }).isRequired,
 };
 

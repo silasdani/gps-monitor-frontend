@@ -22,7 +22,11 @@ class EditUserPage extends React.Component {
       <div>
         <h1>User #{id}</h1>
         <EditDeleteUserForm submit={this.submit} id={id} />
-        <Button disabled={id===localStorage.id} negative onClick={this.delete}>
+        <Button
+          disabled={id === localStorage.id}
+          negative
+          onClick={this.delete}
+        >
           Delete
         </Button>
       </div>
@@ -37,9 +41,10 @@ EditUserPage.propTypes = {
     }).isRequired,
   }).isRequired,
   editUser: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default connect(null, { editUser, deleteUser })(EditUserPage);
+export default connect({ editUser, deleteUser })(EditUserPage);

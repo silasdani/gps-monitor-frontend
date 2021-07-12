@@ -62,9 +62,7 @@ class WeeklyReportForm extends React.Component {
                   <Card.Description>
                     <p>
                       <strong>Distance: </strong>
-                      {sub.track.distKM(
-                        this.state.data.week_before_last_week_report.distance
-                      )}
+                      {this.state.data.week_before_last_week_report.distance} Km
                     </p>
                     <p>
                       <strong>Time: </strong>
@@ -74,7 +72,10 @@ class WeeklyReportForm extends React.Component {
                     </p>
                     <p>
                       <strong>Average speed: </strong>
-                      {this.state.data.week_before_last_week_report.av_speed.toFixed(2)} km
+                      {
+                        this.state.data.week_before_last_week_report.av_speed
+                      }{" "}
+                      Km/h
                     </p>
                   </Card.Description>
                 </Card.Content>
@@ -85,7 +86,8 @@ class WeeklyReportForm extends React.Component {
       },
       {
         menuItem: "LAST WEEK",
-        render: () => <Tab.Pane attached={false}>
+        render: () => (
+          <Tab.Pane attached={false}>
             <Card.Group className="centered">
               <Card>
                 <Card.Content textAlign="left">
@@ -97,16 +99,14 @@ class WeeklyReportForm extends React.Component {
                   />
                   <Card.Header>One week ago</Card.Header>
                   <Card.Meta>
-                    {Momemt(
-                      this.state.data.last_week_report.week
-                    ).format("MMM Do YYYY")}
+                    {Momemt(this.state.data.last_week_report.week).format(
+                      "MMM Do YYYY"
+                    )}
                   </Card.Meta>
                   <Card.Description>
                     <p>
                       <strong>Distance: </strong>
-                      {sub.track.distKM(
-                        this.state.data.last_week_report.distance
-                      )}
+                      {this.state.data.last_week_report.distance} Km
                     </p>
                     <p>
                       <strong>Time: </strong>
@@ -116,18 +116,19 @@ class WeeklyReportForm extends React.Component {
                     </p>
                     <p>
                       <strong>Average speed: </strong>
-                      {this.state.data.last_week_report.av_speed.toFixed(2)} km
+                      {this.state.data.last_week_report.av_speed} Km/h
                     </p>
                   </Card.Description>
                 </Card.Content>
               </Card>
             </Card.Group>
-        </Tab.Pane>,
+          </Tab.Pane>
+        ),
       },
       {
         menuItem: "THIS WEEK",
-        render: () => <Tab.Pane attached={false}>
-            
+        render: () => (
+          <Tab.Pane attached={false}>
             <Card.Group className="centered">
               <Card>
                 <Card.Content textAlign="left">
@@ -139,16 +140,14 @@ class WeeklyReportForm extends React.Component {
                   />
                   <Card.Header>This week</Card.Header>
                   <Card.Meta>
-                    {Momemt(
-                      this.state.data.this_week_report.week
-                    ).format("MMM Do YYYY")}
+                    {Momemt(this.state.data.this_week_report.week).format(
+                      "MMM Do YYYY"
+                    )}
                   </Card.Meta>
                   <Card.Description>
                     <p>
                       <strong>Distance: </strong>
-                      {sub.track.distKM(
-                        this.state.data.this_week_report.distance
-                      )}
+                      {this.state.data.this_week_report.distance} Km
                     </p>
                     <p>
                       <strong>Time: </strong>
@@ -158,13 +157,14 @@ class WeeklyReportForm extends React.Component {
                     </p>
                     <p>
                       <strong>Average speed: </strong>
-                      {this.state.data.this_week_report.av_speed.toFixed(2)} km
+                      {this.state.data.this_week_report.av_speed} Km/h
                     </p>
                   </Card.Description>
                 </Card.Content>
               </Card>
             </Card.Group>
-        </Tab.Pane>,
+          </Tab.Pane>
+        ),
       },
     ];
 
@@ -173,7 +173,7 @@ class WeeklyReportForm extends React.Component {
         <Tab
           loading={loading}
           menu={{ borderless: true, attached: false, tabular: false }}
-          panes={panes}
+          panes= { panes }
         />
       </React.Fragment>
     );

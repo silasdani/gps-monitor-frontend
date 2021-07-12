@@ -32,8 +32,8 @@ class TrackForm extends React.Component {
 
   validate = (data) => {
     const errors = {};
-    if (data.time <= 0) errors.time = "Can't be 0";
-    if (data.distance <= 0) errors.distance = "Can't be 0";
+    if (data.time <= 0) errors.time = "Can't be 0 or negative";
+    if (data.distance <= 0) errors.distance = "Can't be 0 or negative";
     return errors;
   };
 
