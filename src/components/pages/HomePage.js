@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import * as actions from "../../actions/auth";
 
 const HomePage = ({ isAuthenticated, logout }) => (
-  <div Style="text-align: center;">
+  <React.Fragment Style="text-align: center;">
     <h2>Home</h2>
-    <p>
+    <h3>
       This is a website used to track the time records of it's users activity.
-    </p>
+    </h3>
     {isAuthenticated ? (
       <div>
         <button className="ui blue button" onClick={() => logout()}>
@@ -25,7 +25,7 @@ const HomePage = ({ isAuthenticated, logout }) => (
         </a>
       </div>
     )}
-  </div>
+  </React.Fragment >
 );
 
 HomePage.propTypes = {

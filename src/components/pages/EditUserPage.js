@@ -47,4 +47,4 @@ EditUserPage.propTypes = {
   }).isRequired,
 };
 
-export default connect({ editUser, deleteUser })(EditUserPage);
+export default connect(null, { editUser, deleteUser })(EditUserPage);

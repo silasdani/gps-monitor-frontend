@@ -25,10 +25,9 @@ import WeeklyReportPage from "./components/pages/WeeklyReportPage";
 
 const App = ({ location }) => (
  
-  <div >
+  <React.Fragment>
     {<TopNavigation />}
-    <div
-      Style="background-color: #FFFFCC;"
+    <div  Style="background-color: #FFFFCC;"
       className="ui container row column padding-reset medium message page grid centered "
     >
       <Route location={location} path="/" exact component={HomePage} />
@@ -107,7 +106,7 @@ const App = ({ location }) => (
         component={WeeklyReportPage}
       />
     </div>
-  </div>
+  </React.Fragment>
 );
 
 App.propTypes = {

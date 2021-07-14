@@ -44,7 +44,7 @@ class ForgotPasswordForm extends React.Component {
 
     return (
       <Form onSubmit={this.onSubmit} loading={loading}>
-        {!!errors.global && <Message negative>{errors.global}</Message>}
+        {!!errors.global && <Message negative>{errors}</Message>}
         <Form.Field error={!!errors.email}>
           <label htmlFor="email">Email</label>
           <input

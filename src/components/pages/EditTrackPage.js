@@ -43,4 +43,4 @@ EditTrackPage.propTypes = {
   }).isRequired,
 };
 
-export default connect({ editTrack, deleteTrack })(EditTrackPage);
+export default connect(null, { editTrack, deleteTrack })(EditTrackPage);
