@@ -173,7 +173,7 @@ class WeeklyReportForm extends React.Component {
         <Tab
           loading={loading}
           menu={{ borderless: true, attached: false, tabular: false }}
-          panes= { panes }
+          panes={panes}
         />
       </React.Fragment>
     );

@@ -18,7 +18,6 @@ class ForgotPasswordPage extends React.Component {
   render() {
     return (
       <div>
-        
         <h1>Forgot Password</h1>
         {this.state.success ? (
           <Message>Email has been sent.</Message>

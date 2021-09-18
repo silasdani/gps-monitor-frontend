@@ -69,7 +69,7 @@ AllUsersPage.propTypes = {
     }).isRequired,
   }).isRequired,
   location: PropTypes.shape({
-      search: PropTypes.string.isRequired
+    search: PropTypes.string.isRequired
   }).isRequired,
 };
 
