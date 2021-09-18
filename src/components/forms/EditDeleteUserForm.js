@@ -152,7 +152,7 @@ EditDeleteTrackForm.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    isAdmin: state.user.admin ==="true" ? true : false
+    isAdmin: state.user.admin === "true" ? true : false
   };
 }
 

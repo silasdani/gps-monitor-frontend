@@ -24,10 +24,10 @@ import AllTracksPage from "./components/pages/AllTracksPage";
 import WeeklyReportPage from "./components/pages/WeeklyReportPage";
 
 const App = ({ location }) => (
- 
+
   <React.Fragment>
     {<TopNavigation />}
-    <div  Style="background-color: #FFFFCC;"
+    <div Style="background-color: #FFFFCC;"
       className="ui container row column padding-reset medium message page grid centered "
     >
       <Route location={location} path="/" exact component={HomePage} />
