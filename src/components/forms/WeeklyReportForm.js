@@ -11,13 +11,13 @@ class WeeklyReportForm extends React.Component {
         week: "2021-07-05",
         distance: 63,
         time: 4220,
-        av_speed: 53.74407582938389,
+        av_speed: 53.74,
       },
       last_week_report: {
         week: "2021-06-28",
-        distance: 40.33576939081121,
+        distance: 40.33,
         time: 11281,
-        av_speed: 12.871976757993115,
+        av_speed: 12.87,
       },
       week_before_last_week_report: {
         week: "2021-06-21",

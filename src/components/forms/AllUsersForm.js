@@ -43,7 +43,7 @@ class AllUsersForm extends React.Component {
               </Card.Content>
               <Card.Content extra>
                 <Button circular positive href={"/users/edit/" + element.id}>
-                  <i className="icon settings"></i> SETTINGS
+                  <i className="icon settings"></i> EDIT
                 </Button>
               </Card.Content>
             </Card>
