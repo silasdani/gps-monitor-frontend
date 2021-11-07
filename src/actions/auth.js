@@ -44,4 +44,4 @@ export const resetPasswordRequest =
 
 export const validateToken = (token) => () => api.user.validateToken(token);
 
-export const resetPassword = (data) => () => console.warn(data)//api.user.resetPassword(data);
+export const resetPassword = (data) => () => console.warn(data);

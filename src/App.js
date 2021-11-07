@@ -22,90 +22,89 @@ import AllUsersPage from "./components/pages/AllUsersPage";
 import EditUserPage from "./components/pages/EditUserPage";
 import AllTracksPage from "./components/pages/AllTracksPage";
 import WeeklyReportPage from "./components/pages/WeeklyReportPage";
+import MapContainer from "./components/MapContainer";
 
 const App = ({ location }) => (
 
   <React.Fragment>
+
     {<TopNavigation />}
-    <div Style="background-color: #FFFFCC;"
-      className="ui container row column padding-reset medium message page grid centered "
-    >
-      <Route location={location} path="/" exact component={HomePage} />
-      <Route
-        location={location}
-        path={"/confirmation/:token/:action"}
-        exact
-        component={ConfirmationPage}
-      />
-      <GuestRoute
-        location={location}
-        path="/login"
-        exact
-        component={LoginPage}
-      />
-      <GuestRoute
-        location={location}
-        path="/signup"
-        exact
-        component={SignupPage}
-      />
-      <GuestRoute
-        location={location}
-        path="/forgot_password"
-        exact
-        component={ForgotPasswordPage}
-      />
-      <GuestRoute
-        location={location}
-        path="/reset_password/:token"
-        exact
-        component={ResetPasswordPage}
-      />
-      <UserRoute
-        location={location}
-        path="/dashboard"
-        exact
-        component={DashboardPage}
-      />
-      <UserRoute
-        location={location}
-        path="/tracks/new"
-        exact
-        component={NewTrackPage}
-      />
-      <UserRoute
-        location={location}
-        path="/tracks/edit/:id"
-        exact
-        component={EditTrackPage}
-      />
-      <UserRoute
-        location={location}
-        path="/users"
-        exact
-        component={AllUsersPage}
-      />
-      <UserRoute
-        location={location}
-        path="/users/edit/:id"
-        exact
-        component={EditUserPage}
-      />
+    <MapContainer />
+    <Route location={location} path="/" exact component={HomePage} />
+    <Route
+      location={location}
+      path={"/confirmation/:token/:action"}
+      exact
+      component={ConfirmationPage}
+    />
+    <GuestRoute
+      location={location}
+      path="/login"
+      exact
+      component={LoginPage}
+    />
+    <GuestRoute
+      location={location}
+      path="/signup"
+      exact
+      component={SignupPage}
+    />
+    <GuestRoute
+      location={location}
+      path="/forgot_password"
+      exact
+      component={ForgotPasswordPage}
+    />
+    <GuestRoute
+      location={location}
+      path="/reset_password/:token"
+      exact
+      component={ResetPasswordPage}
+    />
+    <UserRoute
+      location={location}
+      path="/dashboard"
+      exact
+      component={DashboardPage}
+    />
+    <UserRoute
+      location={location}
+      path="/tracks/new"
+      exact
+      component={NewTrackPage}
+    />
+    <UserRoute
+      location={location}
+      path="/tracks/edit/:id"
+      exact
+      component={EditTrackPage}
+    />
+    <UserRoute
+      location={location}
+      path="/users"
+      exact
+      component={AllUsersPage}
+    />
+    <UserRoute
+      location={location}
+      path="/users/edit/:id"
+      exact
+      component={EditUserPage}
+    />
 
-      <UserRoute
-        location={location}
-        path="/tracks/all"
-        exact
-        component={AllTracksPage}
-      />
+    <UserRoute
+      location={location}
+      path="/tracks/all"
+      exact
+      component={AllTracksPage}
+    />
 
-      <UserRoute
-        location={location}
-        path="/weekly"
-        exact
-        component={WeeklyReportPage}
-      />
-    </div>
+    <UserRoute
+      location={location}
+      path="/weekly"
+      exact
+      component={WeeklyReportPage}
+    />
   </React.Fragment>
 );
 

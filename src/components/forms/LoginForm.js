@@ -51,7 +51,7 @@ class LoginForm extends React.Component {
     return (
       <div>
         <h1>Log in</h1>
-        <Form onSubmit={this.onSubmit} loading={loading}>
+        <Form onSubmit={this.onSubmit} loading={loading} textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
           {errors.global && (
             <Message negative>
               <Message.Header>Something went wrong</Message.Header>
