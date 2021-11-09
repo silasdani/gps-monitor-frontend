@@ -1,6 +1,7 @@
-import reportWebVitals from "./reportWebVitals";
 import React from "react";
 import ReactDOM from "react-dom";
+import './index.css';
+import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route } from "react-router-dom";
 import "semantic-ui-css/semantic.min.css";
 import { createStore, applyMiddleware } from "redux";

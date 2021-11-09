@@ -18,17 +18,13 @@ import DashboardPage from "./components/pages/DashboardPage";
 import EditTrackPage from "./components/pages//EditTrackPage";
 import NewTrackPage from "./components/pages//NewTrackPage";
 //Users
-import AllUsersPage from "./components/pages/AllUsersPage";
-import EditUserPage from "./components/pages/EditUserPage";
-import AllTracksPage from "./components/pages/AllTracksPage";
-import WeeklyReportPage from "./components/pages/WeeklyReportPage";
+import { AllUsersPage, EditUserPage, AllTracksPage, WeeklyReportPage } from "./components/pages";
 import MapContainer from "./components/MapContainer";
 
 const App = ({ location }) => (
 
   <React.Fragment>
-
-    {<TopNavigation />}
+    <TopNavigation />
     <MapContainer />
     <Route location={location} path="/" exact component={HomePage} />
     <Route

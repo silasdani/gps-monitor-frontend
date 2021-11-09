@@ -30,8 +30,7 @@ export class MapContainer extends Component {
     }
 
     render() {
-        console.warn(this.props.google)
-        return (
+        return (<div className="">
             <Map
                 google={this.props.google}
                 zoom={15}
@@ -40,6 +39,7 @@ export class MapContainer extends Component {
             >
                 {this.displayMarkers()}
             </Map>
+        </div>
         );
     }
 }

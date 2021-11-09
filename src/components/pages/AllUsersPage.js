@@ -12,7 +12,6 @@ class AllUsersPage extends React.Component {
     const { isManagerOrAdmin, usersAll } = this.props;
     return (
       <div>
-        <h1>All Users</h1>
         {isManagerOrAdmin && (
           <AllUsersForm submit={this.submit} users={usersAll} />
         )}
