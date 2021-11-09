@@ -6,7 +6,7 @@ export const UserContainer = (props) => {
     const { name, id, email } = attributes;
 
     return (
-        <figure className="bg-gray-100 rounded-xl p-8">
+        <figure className={`bg-gray-100 rounded-xl p-8 z-40 max-w-sm ${!!props.left ? 'ml-0' : ''} ${!!props.right ? 'mr-0' : ''}`} >
             <img className="w-32 h-32 rounded-full mx-auto" src={"https://i.pravatar.cc/150?u=" + id} alt="" width="384" height="512" />
             <div className="pt-6 text-center space-y-4">
                 <blockquote>
