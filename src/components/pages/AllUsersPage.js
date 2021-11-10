@@ -11,17 +11,17 @@ class AllUsersPage extends React.Component {
   render() {
     const { isManagerOrAdmin, usersFirstHalf, usersSecondHalf } = this.props;
     return (
-      <div className="grid grid-cols-2 g">
+      <div className="flex flex-col gap-x-4">
         {isManagerOrAdmin && (
-          <div className="flex flex-col max-h-screen overflow-y-auto ml-0 justify-self-start">
+          <div className="flex flex-row max-h-screen overflow-x-auto ">
             {usersFirstHalf.map((user) => (<UserContainer user={user} left={true} />))}
           </div>
         )}
-        {isManagerOrAdmin && (
-          <div className="flex flex-col max-h-screen overflow-y-auto mr-0 justify-self-end" >
+        {/* {isManagerOrAdmin && (
+          <div className="flex flex-col max-h-screen overflow-y-auto justify-self-end gap-y-10" >
             {usersSecondHalf.map((user) => (<UserContainer user={user} right={true} />))}
           </div>
-        )}
+        )} */}
       </div>
     );
   }

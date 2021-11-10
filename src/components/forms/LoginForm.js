@@ -21,14 +21,12 @@ class LoginForm extends React.Component {
     });
 
   onSubmit = () => {
-    // se trimite formularul catre loginPages
-    const errors = this.validate(this.state.data); // se valideaza datele
+    const errors = this.validate(this.state.data); 
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
-      // daca nu avem erori, facem request
       this.setState({ loading: true });
       this.props
-        .submit(this.state.data) // se trimit credentialele carte auth
+        .submit(this.state.data)
         .catch(() => {
           this.setState({
             errors: { global: "Invalid email or password" },
