@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Button } from 'semantic-ui-react';
 
 export const UserContainer = (props) => {
     const { attributes } = props.user;
     const { name, id, email } = attributes;
 
     return (
-        <button className={`bg-gray-100 min-h-32 max-w-32 rounded-xl z-40 focus:ring-blue-600`}>
+        <button className={"bg-gray-100 bg-opacity-60 border border-gray-100 rounded-xl hover:border-gray-500  focus:bg-gray-200 focus:border-opacity-0"}>
             <figure className={'rounded-xl'} >
-                <img className="w-32 h-32 rounded-full mx-auto" src={"https://i.pravatar.cc/150?u=" + id} alt="" width="384" height="512" />
+                <img className="rounded-full mx-auto" src={"https://i.pravatar.cc/150?u=" + id} alt="" />
                 <div className="pt-6 text-center space-y-4">
                     <blockquote>
                         <p className="text-lg font-semibold">

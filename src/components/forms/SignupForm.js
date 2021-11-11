@@ -52,12 +52,13 @@ class SignupForm extends React.Component {
     const { data, errors, loading } = this.state;
 
     return (
-      <div>
-        <h1>Sign up</h1>
-        <Form onSubmit={this.onSubmit} loading={loading}>
-          <Form.Field error={!!errors.name}>
-            <label htmlFor="text">Name</label>
+      <div className="container">
+        <form className="form">
+          <h1>Sign up</h1>
+          <div className="mb-4">
+            <label className="label" htmlFor="text">Name</label>
             <input
+              className="input"
               type="text"
               id="name"
               name="name"
@@ -66,11 +67,12 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
             />
             {errors.name && <InlineError text={errors.name} />}
-          </Form.Field>
+          </div>
 
-          <Form.Field error={!!errors.email}>
-            <label htmlFor="email">Email</label>
+          <div className="mb-4">
+            <label className="label" htmlFor="email">Email</label>
             <input
+              className="input"
               type="email"
               id="email"
               name="email"
@@ -79,11 +81,12 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
             />
             {errors.email && <InlineError text={errors.email} />}
-          </Form.Field>
+          </div>
 
-          <Form.Field error={!!errors.password}>
-            <label htmlFor="password">Password</label>
+          <div className="mb-4">
+            <label className="label" htmlFor="password">Password</label>
             <input
+              className="pass-input"
               type="password"
               id="password"
               name="password"
@@ -92,11 +95,12 @@ class SignupForm extends React.Component {
               onChange={this.onChange}
             />
             {errors.password && <InlineError text={errors.password} />}
-          </Form.Field>
+          </div>
 
-          <Form.Field error={!!errors.password_confirmation}>
-            <label htmlFor="password">Password confirmation</label>
+          <div className="mb-4">
+            <label className="label" htmlFor="password">Password confirmation</label>
             <input
+              className="pass-input"
               type="password"
               id="password_confirmation"
               name="password_confirmation"
@@ -107,10 +111,12 @@ class SignupForm extends React.Component {
             {errors.password_confirmation && (
               <InlineError text={errors.password_confirmation} />
             )}
-          </Form.Field>
+          </div>
 
-          <Button primary>Sign Up</Button>
-        </Form>
+          <button className="button focus:outline-none focus:shadow-outline" type="button" onClick={this.onSubmit}>
+            Sign Up
+          </button>
+        </form>
       </div>
     );
   }

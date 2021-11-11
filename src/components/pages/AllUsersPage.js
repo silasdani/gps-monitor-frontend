@@ -9,19 +9,14 @@ class AllUsersPage extends React.Component {
   componentDidMount = () => this.props.fetchUsers();
 
   render() {
-    const { isManagerOrAdmin, usersFirstHalf, usersSecondHalf } = this.props;
+    const { isManagerOrAdmin, usersAll } = this.props;
     return (
-      <div className="flex flex-col gap-x-4">
+      <div className="flex flex-col max-w-sm max-h-screen overflow-y-auto">
         {isManagerOrAdmin && (
-          <div className="flex flex-row max-h-screen overflow-x-auto ">
-            {usersFirstHalf.map((user) => (<UserContainer user={user} left={true} />))}
+          <div className="z-20 ml-16 py-5 min-h-32 max-w-32 space-y-10">
+            {usersAll?.map((user) => (<UserContainer user={user} />))}
           </div>
         )}
-        {/* {isManagerOrAdmin && (
-          <div className="flex flex-col max-h-screen overflow-y-auto justify-self-end gap-y-10" >
-            {usersSecondHalf.map((user) => (<UserContainer user={user} right={true} />))}
-          </div>
-        )} */}
       </div>
     );
   }
@@ -39,15 +34,9 @@ AllUsersPage.propTypes = {
 const mapStateToProps = (state) => {
   const usersAll = Object.values(state.users);
 
-  const half = Math.ceil(usersAll.length / 2);
-
-  const usersFirstHalf = usersAll.slice(0, half)
-  const usersSecondHalf = usersAll.slice(-half)
-
   return {
     isManagerOrAdmin: !!state.user.manager || !!state.user.admin,
-    usersFirstHalf,
-    usersSecondHalf,
+    usersAll,
   };
 }
 

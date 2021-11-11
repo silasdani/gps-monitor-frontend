@@ -21,7 +21,7 @@ class LoginForm extends React.Component {
     });
 
   onSubmit = () => {
-    const errors = this.validate(this.state.data); 
+    const errors = this.validate(this.state.data);
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
@@ -47,18 +47,19 @@ class LoginForm extends React.Component {
     const { data, errors, loading } = this.state;
 
     return (
-      <div>
-        <h1>Log in</h1>
-        <Form onSubmit={this.onSubmit} loading={loading} textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <div className="container">
+        <form className="form">
+          <h1>Log in</h1>
           {errors.global && (
-            <Message negative>
-              <Message.Header>Something went wrong</Message.Header>
+            <div className="text-red-700">
+              <p className="font-medium" >Something went wrong</p>
               <p>{errors.global}</p>
-            </Message>
+            </div>
           )}
-          <Form.Field error={!!errors.email}>
-            <label htmlFor="email">Email</label>
+          <div className="mb-4">
+            <label className="label" htmlFor="email">Email</label>
             <input
+              className="input focus:outline-none focus:shadow-outline"
               type="email"
               id="email"
               name="email"
@@ -66,11 +67,12 @@ class LoginForm extends React.Component {
               value={data.email}
               onChange={this.onChange}
             />
-            {errors.email && <InlineError text={errors.email} />}
-          </Form.Field>
-          <Form.Field error={!!errors.password}>
-            <label htmlFor="password">Password</label>
+          </div>
+          {errors.email && <InlineError text={errors.email} />}
+          <div className="mb-6">
+            <label className="label" htmlFor="password">Password</label>
             <input
+              className="pass-input"
               type="password"
               id="password"
               name="password"
@@ -79,10 +81,15 @@ class LoginForm extends React.Component {
               onChange={this.onChange}
             />
             {errors.password && <InlineError text={errors.password} />}
-          </Form.Field>
-          <Button primary>Login</Button>
-        </Form>
-        <Link to="/forgot_password">Forgot Password?</Link>
+          </div>
+          <div class="flex items-center justify-between">
+            <button className="button focus:outline-none focus:shadow-outline" type="button" onClick={this.onSubmit}>
+              Sign In
+            </button>
+            <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" to="/forgot_password">Forgot Password?</Link>
+          </div>
+        </form>
+
       </div>
     );
   }

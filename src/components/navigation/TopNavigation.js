@@ -5,43 +5,29 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../../actions/auth";
 
-
-
 const TopNavigation = ({ user, logout, home, isAuthenticated }) => (
-  <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
-  <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
-    <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
-      <div class="flex items-center justify-between w-full md:w-auto">
-        <a href="/">
-          <span class="sr-only">Workflow</span>
-          <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" />
-        </a>
-        <div class="-mr-2 flex items-center md:hidden">
-          <button type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            {/* <!-- Heroicon name: outline/menu --> */}
-            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
+  <div className="z-50">
+    <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6 z-50" aria-label="Global">
+      <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" /></svg>
+        <span class="font-semibold text-xl tracking-tight">Tailwind CSS</span>
       </div>
-    </div>
-    <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-      <a href="/weekly" class="font-medium text-gray-500 hover:text-gray-900">Insights</a>
-
-      <a href="/tracks/new" class="font-medium text-gray-500 hover:text-gray-900">Features</a>
-
-      <a href="/users" class="font-medium text-gray-500 hover:text-gray-900">Users</a>
-
-      <a href="/signup" class="font-medium text-gray-500 hover:text-gray-900">Sign Up</a>
-
-      <a href="/login" class="font-medium text-indigo-600 hover:text-indigo-500">Log in</a>
-
-      <button class="font-medium float-right text-indigo-600 hover:text-indigo-500" onClick={() => (logout())}>Log out</button>
-    </div>
-  </nav>
-</div>
+      <div class="block lg:hidden">
+        <button class="flex items-center px-3 py-2 border rounded text-blue-200 border-blue-400 hover:text-white hover:border-white">
+          <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
+        </button>
+      </div>
+      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div className="text-sm lg:flex-grow">
+          {isAuthenticated && <a href="/weekly" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">Weekly Report</a>}
+          {isAuthenticated && <a href="/tracks/new" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">Add New Track</a>}
+          {isAuthenticated && <a href="/users" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">Users</a>}
+          {!isAuthenticated && <a href="/signup" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">Sign Up</a>}
+          {!isAuthenticated && <a href="/login" class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4">Log in</a>}
+          {isAuthenticated && <button class="block mt-4 lg:inline-block lg:mt-0 text-blue-200 hover:text-white mr-4" onClick={() => (logout())}>Log out</button>}
+        </div></div>
+    </nav>
+  </div>
   // <Menu pointing className="from-fuchsia-500 to-purple-600">
   //   {
   //     <Menu.Item className="active item red" as={Link} to={home}>
@@ -95,9 +81,6 @@ const TopNavigation = ({ user, logout, home, isAuthenticated }) => (
   //           />
   //         }
   //       >
-  //         <Dropdown.Menu>
-  //           <Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item>
-  //         </Dropdown.Menu>
   //       </Dropdown>
   //     </Menu.Menu>
   //   )}
