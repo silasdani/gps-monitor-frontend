@@ -18,7 +18,7 @@ import DashboardPage from "./components/pages/DashboardPage";
 import EditTrackPage from "./components/pages//EditTrackPage";
 import NewTrackPage from "./components/pages//NewTrackPage";
 //Users
-import { AllUsersPage, EditUserPage, AllTracksPage, WeeklyReportPage } from "./components/pages";
+import { EditUserPage, AllTracksPage, WeeklyReportPage } from "./components/pages";
 import MyMap from "./components/MyMap";
 
 const App = ({ location }) => (
@@ -79,7 +79,7 @@ const App = ({ location }) => (
       location={location}
       path="/users"
       exact
-      component={AllUsersPage}
+      component={DashboardPage}
     />
     <UserRoute
       location={location}

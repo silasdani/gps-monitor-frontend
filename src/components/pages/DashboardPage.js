@@ -1,41 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import ConfirmEmailMessage from "../messages/ConfirmEmailMessage";
-import { fetchTracks } from "../../actions/tracks";
-import MyTracksForm from "../forms/MyTracksForm";
+import { fetchUsers } from "../../actions/users";
+import { UserContainer } from "../UserContainer";
 
 class DashboardPage extends React.Component {
-  submit = () =>
-    this.props.fetchTracks().then(() => this.props.history.push("/dashboard"));
+
+  componentDidMount = () => this.props.fetchUsers();
 
   render() {
-    const { isConfirmed, records } = this.props;
+    const { isManagerOrAdmin, usersAll } = this.props;
     return (
-      <div>
-        <h1>My Tracks</h1>
-        {!isConfirmed && <ConfirmEmailMessage />}
-
-        <MyTracksForm submit={this.submit} tracks={records} />
+      <div className="flex flex-col max-w-sm max-h-screen overflow-y-auto">
+        {isManagerOrAdmin && (
+          <div className="z-20 ml-16 py-5 min-h-32 max-w-32 space-y-10">
+            {usersAll?.map((user) => (<UserContainer user={user} />))}
+          </div>
+        )}
       </div>
     );
   }
 }
 
 DashboardPage.propTypes = {
-  isConfirmed: PropTypes.bool.isRequired,
-  records: PropTypes.array.isRequired,
+  isManagerOrAdmin: PropTypes.bool.isRequired,
+  usersAll: PropTypes.array.isRequired,
+  fetchUsers: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  fetchTracks: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
+  const usersAll = Object.values(state.users);
+
   return {
-    isConfirmed: !!state.user.activated,
-    records: Object.values(state.tracks),
+    isManagerOrAdmin: !!state.user.manager || !!state.user.admin,
+    usersAll,
   };
 }
 
-export default connect(mapStateToProps, { fetchTracks })(DashboardPage);
+export default connect(mapStateToProps, { fetchUsers })(DashboardPage);

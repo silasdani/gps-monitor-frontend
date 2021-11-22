@@ -43,7 +43,7 @@ users: {
   fetchAll: () => 
     axios
       .get("/users")
-      .then((res) => res.data.data),
+      .then((res) => res.data),
 
   getData: (id) =>
     axios

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { confirm } from "../../actions/auth";
 
-class AllUsersPage extends React.Component {
+class DashboardPage extends React.Component {
   state = {
     loading: true,
     success: false,
@@ -60,7 +60,7 @@ class AllUsersPage extends React.Component {
   }
 }
 
-AllUsersPage.propTypes = {
+DashboardPage.propTypes = {
   confirm: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -73,4 +73,4 @@ AllUsersPage.propTypes = {
   }).isRequired,
 };
 
-export default connect(null, { confirm })(AllUsersPage);
+export default connect(null, { confirm })(DashboardPage);

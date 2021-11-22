@@ -1,5 +1,5 @@
 import moment from "moment";
-// eslint-disable-next-line
+
 export default {
   track: {
     secondsToHms: (d) => {
@@ -26,4 +26,13 @@ export default {
       return filteredTracks;
     },
   },
+  gedMidPoint: (locations) => {
+    const middle = locations[0];
+    return locations?.reduce((mid = middle, location) => {
+      const { lat, lng } = location;
+      mid.lat = (lat + mid.lat) / 2;
+      mid.lng = (lng + mid.lng) / 2;
+      return mid;
+    });
+  }
 };

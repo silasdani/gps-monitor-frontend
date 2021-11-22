@@ -37,4 +37,28 @@ export const editUser = (user, id) => (dispatch) =>
   api.users.editUser(user, id).then((data) => dispatch(userEdited(data)));
 
 export const fetchUsers = () => (dispatch) =>
-  api.users.fetchAll().then((data) => dispatch(usersFetched(data)));
+  api.users.fetchAll().then((data) => {
+    const users = data.data;
+    const allLocations = data.included;
+    let userData = []
+
+    users.map((user) => {
+      const locationsRefs = user.relationships.locations.data;
+      const userLocations = []
+      locationsRefs.map(({ id }) => {
+        const { attributes } = allLocations.find((loc => loc.id == id))
+        userLocations.push({
+          lat: Number(attributes.latitude),
+          lng: Number(attributes.longitude),
+        })
+      })
+      userData.push({
+        id: user.id,
+        attributes: user.attributes,
+        locations: userLocations
+      })
+
+    })
+
+    return dispatch(usersFetched(userData))
+  });
