@@ -22,7 +22,7 @@ export class MyMap extends Component {
     render() {
         const center = !!this.state.locations ? subprograms.gedMidPoint(this.state.locations) : { lat: 47.231, lng: -122.43412 }
         return (
-            <div className="z-0">
+            <div className="z-0 relative">
                 <MapContainer center={center} zoom={13} scrollWheelZoom={true}
                     style={{ width: '100vw', height: '100vh', position: 'absolute', zIndex: 0 }}>
                     <TileLayer

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
 // Account
-import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import SignupPage from "./components/pages/SignupPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
@@ -26,7 +25,6 @@ const App = ({ location }) => (
   <React.Fragment>
     <TopNavigation />
     <MyMap />
-    <Route location={location} path="/" exact component={HomePage} />
     <Route
       location={location}
       path={"/confirmation/:token/:action"}

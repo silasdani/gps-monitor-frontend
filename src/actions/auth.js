@@ -15,6 +15,7 @@ export const userLoggedOut = () => ({
 export const login = (credentials) => (dispatch) =>
   api.user.login(credentials).then((user) => {
     localStorage.name = user.name;
+    localStorage.email = user.email;
     localStorage.confirmed = user.activated;
     localStorage.id = user.id;
     localStorage.admin = user.admin;

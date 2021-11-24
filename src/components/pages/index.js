@@ -8,7 +8,6 @@ import EditTrackPage from "./EditTrackPage";
 import NewTrackPage from "./NewTrackPage";
 
 // Account
-import HomePage from "./HomePage";
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import ConfirmationPage from "./ConfirmationPage";
@@ -17,4 +16,4 @@ import ResetPasswordPage from "./ResetPasswordPage";
 
 export { EditTrackPage, NewTrackPage };
 export { EditUserPage, AllTracksPage, WeeklyReportPage };
-export { HomePage, LoginPage, SignupPage, ConfirmationPage, ForgotPasswordPage, ResetPasswordPage };
+export { LoginPage, SignupPage, ConfirmationPage, ForgotPasswordPage, ResetPasswordPage };
