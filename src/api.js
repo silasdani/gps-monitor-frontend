@@ -103,12 +103,8 @@ export default {
   locations: {
     getUserLocations: (id) =>
       axios
-        .get(`/locations${id}`)
-        .then((data) => {
-          console.warn(data)
-          return data})
-        .catch((err) => {
-          console.warn(err)
-          return err.message})
+        .get(`/locations/${id}`)
+        .then((data) => data?.data?.data)
+        .catch((err) => err.message)
   }
 }
