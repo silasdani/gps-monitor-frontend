@@ -36,7 +36,6 @@ DashboardPage.propTypes = {
 
 const mapStateToProps = (state) => {
   const usersAll = Object.values(state.users);
-  // console.warn(usersAll)
   const me = { attributes: state?.user };
   return {
     isManagerOrAdmin: !!state.user.manager || !!state.user.admin,

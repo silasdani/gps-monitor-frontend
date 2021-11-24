@@ -6,7 +6,6 @@ import { fetchUserLocations } from '../actions/locations';
 class UserContainer extends Component {
     onUserClick = () => {
         const { id } = this.props.user?.attributes;
-        console.warn(id)
         this.props.fetchUserLocations(id);
     }
 
