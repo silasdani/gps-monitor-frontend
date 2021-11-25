@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import { fetchUserLocations } from '../actions/locations';
+import { fetchUserLocations, fetchUserLocationsByDate } from '../actions/locations';
 
 class UserContainer extends Component {
     onUserClick = () => {
         const { id } = this.props.user?.attributes;
-        this.props.fetchUserLocations(id);
+        const { filtered, startTime, endTime } = this.props;
+
+        if (!filtered) this.props.fetchUserLocations(id);
+        else if (!!startTime && !!endTime) {
+            this.props.fetchUserLocationsByDate(id, {
+                date: {
+                    start_time: startTime,
+                    end_time: endTime
+                }
+            });
+        }
     }
 
     render() {
@@ -37,7 +47,7 @@ class UserContainer extends Component {
     }
 }
 
-export default connect(null, { fetchUserLocations })(UserContainer);
+export default connect(null, { fetchUserLocations, fetchUserLocationsByDate })(UserContainer);
 
 UserContainer.propTypes = {
     user: PropTypes.object.isRequired,

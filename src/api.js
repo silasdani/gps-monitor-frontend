@@ -105,6 +105,12 @@ export default {
       axios
         .get(`/locations/${id}`)
         .then((data) => data?.data?.data)
-        .catch((err) => err.message)
-  }
+        .catch((err) => err.message),
+
+    getUserLocationsByDate: (id, date) =>{
+      return axios
+        .post(`/user_locations/${id}`, date)
+        .then((data) => data?.data?.data)
+        .catch((err) => err.message)},
+  },
 }
