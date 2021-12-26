@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export default {
+const Utils = {
   track: {
     secondsToHms: (d) => {
       if (d === 0) return "0 seconds";
@@ -36,3 +36,5 @@ export default {
     });
   }
 };
+
+export default Utils;

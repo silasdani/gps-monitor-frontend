@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button } from "semantic-ui-react";
 import isEmail from "validator/lib/isEmail";
 import InlineError from "../messages/InlineError";
 
@@ -50,7 +49,7 @@ class SignupForm extends React.Component {
   };
 
   render() {
-    const { data, errors, loading } = this.state;
+    const { data, errors } = this.state;
 
     return (
       <div className="container">
