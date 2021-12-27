@@ -60,5 +60,5 @@
     "react-thunk": "^1.0.0",
     "redux-devtools-extension": "^2.13.9"
   },
-  "proxy": "http://staging-gps-monitor.herokuapp.com/"
+  "proxy": "http://localhost:3000"
 }
