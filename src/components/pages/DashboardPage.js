@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchUsers } from "../../actions/users";
 import UserContainer from "../UserContainer";
 import DateTimePicker from 'react-datetime-picker';
-
+import { fetchAll } from "../../redux/ducks/userDuck"
 class DashboardPage extends React.Component {
   state = {
     startTime: new Date(),
@@ -46,7 +45,7 @@ class DashboardPage extends React.Component {
     })
   }
 
-  componentDidMount = () => this.props.fetchUsers();
+  componentDidMount = () => this.props.fetchAll();
 
   render() {
     const { isManagerOrAdmin, usersAll } = this.props;
@@ -103,8 +102,7 @@ class DashboardPage extends React.Component {
 
 DashboardPage.propTypes = {
   isManagerOrAdmin: PropTypes.bool.isRequired,
-  usersAll: PropTypes.array.isRequired,
-  fetchUsers: PropTypes.func.isRequired,
+  fetchAll: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -120,4 +118,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, { fetchUsers })(DashboardPage);
+export default connect(mapStateToProps, { fetchAll })(DashboardPage);

@@ -7,7 +7,7 @@ export class MyMap extends Component {
 
     render() {
         const { locations } = this.props;
-        const center = locations.length > 0 ? subprograms.gedMidPoint(locations) : { lat: 47.231, lng: 23.5882 }
+        const center = locations?.length > 0 ? subprograms.gedMidPoint(locations) : { lat: 47.231, lng: 23.5882 }
         return (
             <div className="z-0 relative">
                 <MapContainer
@@ -28,11 +28,8 @@ export class MyMap extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const locations = Object.values(state.locations)?.map(location => ({
-        ...location.attributes,
-        lat: Number(location.attributes?.latitude),
-        lng: Number(location.attributes?.longitude),
-    }))
+    const { locations } = state.location;
+
     return {
         locations
     }

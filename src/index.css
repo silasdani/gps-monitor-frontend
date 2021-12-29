@@ -11,7 +11,7 @@
 }
 
 .form {
-    @apply shadow-md rounded px-8 pt-6 pb-8 mb-4 z-40 w-full max-w-xs bg-gray-50 bg-opacity-60;
+    @apply shadow-md rounded px-8 pt-6 pb-8 mb-4 z-40 w-full max-w-md bg-gray-50 bg-opacity-60;
 }
 
 .container {

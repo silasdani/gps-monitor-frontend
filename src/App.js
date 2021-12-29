@@ -2,22 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
-// Account
-import LoginPage from "./components/pages/LoginPage";
-import SignupPage from "./components/pages/SignupPage";
-import ConfirmationPage from "./components/pages/ConfirmationPage";
-import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
-import ResetPasswordPage from "./components/pages/ResetPasswordPage";
-//Navigation
+import { LoginPage, SignupPage, ConfirmationPage, ForgotPasswordPage, ResetPasswordPage, DashboardPage, EditUserPage } from "./components/pages";
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
-//Tracks
-import DashboardPage from "./components/pages/DashboardPage";
-import EditTrackPage from "./components/pages//EditTrackPage";
-import NewTrackPage from "./components/pages//NewTrackPage";
-//Users
-import { EditUserPage, AllTracksPage, WeeklyReportPage } from "./components/pages";
 import MyMap from "./components/MyMap";
 
 const App = ({ location }) => (
@@ -63,18 +51,6 @@ const App = ({ location }) => (
     />
     <UserRoute
       location={location}
-      path="/tracks/new"
-      exact
-      component={NewTrackPage}
-    />
-    <UserRoute
-      location={location}
-      path="/tracks/edit/:id"
-      exact
-      component={EditTrackPage}
-    />
-    <UserRoute
-      location={location}
       path="/users"
       exact
       component={DashboardPage}
@@ -84,20 +60,6 @@ const App = ({ location }) => (
       path="/users/edit/:id"
       exact
       component={EditUserPage}
-    />
-
-    <UserRoute
-      location={location}
-      path="/tracks/all"
-      exact
-      component={AllTracksPage}
-    />
-
-    <UserRoute
-      location={location}
-      path="/weekly"
-      exact
-      component={WeeklyReportPage}
     />
   </React.Fragment>
 );

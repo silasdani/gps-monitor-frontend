@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button } from "semantic-ui-react";
-import { editUser, deleteUser } from "../../actions/users";
+import { editUser, deleteUser } from "../../redux/ducks/userDuck"
 import EditDeleteUserForm from "../forms/EditDeleteUserForm";
 
 class EditUserPage extends React.Component {

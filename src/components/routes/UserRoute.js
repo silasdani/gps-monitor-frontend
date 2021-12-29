@@ -6,6 +6,7 @@ import { Route, Redirect } from "react-router-dom";
 const UserRoute = ({ isAuthenticated, component: Component, ...rest }) => (
   <Route
     {...rest}
+    key={Math.random()}
     render={(props) =>
       isAuthenticated ? <Component {...props} /> : <Redirect to="/" />
     }

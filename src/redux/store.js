@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import user from './ducks/userDuck';
 import location from './ducks/locationDuck';
 import spinner from './ducks/spinnerDuck';
-import session from './ducks/sessionDuck';
+import session from "./ducks/sessionDuck"
 
 const rootReducer = combineReducers({
     user,

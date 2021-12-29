@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Message, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { confirm } from "../../actions/auth";
+import { confirm } from "../../redux/ducks/userDuck"
 
 class DashboardPage extends React.Component {
   state = {
