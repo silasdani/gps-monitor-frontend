@@ -99,7 +99,6 @@ class DashboardPage extends React.Component {
 }
 
 DashboardPage.propTypes = {
-  isManagerOrAdmin: PropTypes.bool.isRequired,
   fetchAll: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,

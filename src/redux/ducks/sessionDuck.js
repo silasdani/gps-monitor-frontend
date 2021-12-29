@@ -22,9 +22,15 @@ export const login = (credentials) => (dispatch) => {
         .catch(console.warn)
 }
 
+export const autoLogin = (token) => (dispatch) => {
+    const user = UserSerializer.deserializeToken(token)
+    dispatch(userLoggedIn(user));
+}
+
 export const logout = () => (dispatch) => {
     return new SessionService().logout()
         .then(() => {
+            localStorage.clear();
             dispatch(userLoggedOut());
         })
         .catch(console.warn)

@@ -4,22 +4,13 @@ import './index.css';
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import jwtDecode from "jwt-decode"
 import App from "./App";
-import setAuthorizationHeader from "./utils/setAuthorizationHeader";
-import configureStore from "./redux/store";
-import { userLoggedIn } from "./redux/ducks/sessionDuck"
+import store from "./redux/store";
+import { autoLogin } from "./redux/ducks/sessionDuck"
 
-const store = configureStore();
-
-// if (localStorage.token) {
-//   const payload = jwtDecode(localStorage.token);
-//   console.warn(payload)
-//   const { attributes: { admin, manager, activated, ...user } } = payload.data;
-
-//   setAuthorizationHeader(localStorage.token);
-//   store.dispatch(userLoggedIn(user));
-// }
+if (localStorage.token) {
+  store.dispatch(autoLogin(localStorage.token));
+}
 
 ReactDOM.render(
   <BrowserRouter>

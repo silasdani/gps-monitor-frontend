@@ -19,10 +19,22 @@ const locationsFetchedFailed = (data) => ({
 
 export const clearLocationState = () => ({
     type: CLEAR_LOCATION_STATE
-})
+});
 
-export const fetchLocations = () => (dispatch) => {
-    return new LocationService().fetchMyLocations()
+export const fetchUserLocationsByDate = (id, date) => (dispatch) => {
+    return new LocationService().fetchUserLocationsByDate(id, date)
+        .then((locations) => {
+            if (Array.isArray(locations)) {
+                dispatch(locationsFetched(LocationSerializer.deserialize(locations)))
+            } else {
+                dispatch(locationsFetchedFailed(locations.message))
+            }
+        })
+        .catch(res => dispatch(locationsFetchedFailed(res)));
+}
+
+export const fetchUserLocations = (id) => (dispatch) => {
+    return new LocationService().fetchUserLocations(id)
         .then((locations) => {
             if (Array.isArray(locations)) {
                 dispatch(locationsFetched(LocationSerializer.deserialize(locations)))

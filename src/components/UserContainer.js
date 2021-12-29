@@ -1,26 +1,25 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fetchUserLocationsByDate, fetchUserLocations } from '../redux/ducks/locationDuck'
 
 class UserContainer extends Component {
     onUserClick = () => {
         const { id } = this.props.user?.attributes;
         const { filtered, startTime, endTime } = this.props;
-
-        // if (!filtered) this.props.fetchUserLocations(id);
-        // else if (!!startTime && !!endTime) {
-        //     this.props.fetchUserLocationsByDate(id, {
-        //         date: {
-        //             start_time: startTime,
-        //             end_time: endTime
-        //         }
-        //     });
-        // }
+        if (!filtered) this.props.fetchUserLocations(id);
+        else if (!!startTime && !!endTime) {
+            this.props.fetchUserLocationsByDate(id, {
+                date: {
+                    start_time: startTime,
+                    end_time: endTime
+                }
+            });
+        }
     }
 
     render() {
-        const { attributes } = this.props.user;
-        const { name, id, email } = attributes;
+        const { name, id, email } = this.props.user;
 
         return (<button
             className={"bg-gray-100 bg-opacity-60 border border-gray-100 rounded-xl hover:border-gray-500  focus:bg-gray-200 focus:border-opacity-0"}
@@ -48,8 +47,8 @@ class UserContainer extends Component {
     }
 }
 
-export default connect(null, {})(UserContainer);
-
 UserContainer.propTypes = {
     user: PropTypes.object.isRequired,
 }
+
+export default connect(null, { fetchUserLocations, fetchUserLocationsByDate })(UserContainer);

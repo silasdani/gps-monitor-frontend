@@ -24,4 +24,13 @@ export default class UserSerializer {
             ...user
         }
     }
+
+    static deserializeToken(token) {
+        const data = JSON.parse(jwtDecode(token));
+        const { attributes: { admin, manager, activated, ...user } } = data.data;
+
+        return {
+            ...user
+        }
+    }
 }
