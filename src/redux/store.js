@@ -13,21 +13,8 @@ const rootReducer = combineReducers({
     session,
 });
 
-var Singleton = (() => {
-    var instance;
+const configureStore = () => {
+    return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+}
 
-    function createInstance() {
-        return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-    }
-
-    return {
-        getInstance: function () {
-            if (!instance) {
-                instance = createInstance();
-            }
-            return instance;
-        }
-    };
-})();
-
-export default Singleton.getInstance();
+export default configureStore;

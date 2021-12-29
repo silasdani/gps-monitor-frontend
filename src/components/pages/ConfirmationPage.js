@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Message, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { confirm } from "../../redux/ducks/userDuck"
@@ -29,31 +28,31 @@ class DashboardPage extends React.Component {
     return (
       <div>
         {loading && (
-          <Message icon>
-            <Icon name="circle notched" loading />
-            <Message.Header>Validating your email</Message.Header>
-          </Message>
+          <div>
+            <div name="circle notched" loading />
+            <h1>Validating your email</h1>
+          </div>
         )}
 
         {!loading && success && (
-          <Message success icon>
-            <Icon name="checkmark" />
-            <Message.Content>
-              <Message.Header>
+          <div success>
+            <div name="checkmark" />
+            <div>
+              <h1>
                 Thank you. Your account has been verified.
-              </Message.Header>
+              </h1>
               <Link to="/dashboard">Go to your dashboard</Link>
-            </Message.Content>
-          </Message>
+            </div>
+          </div>
         )}
 
         {!loading && !success && (
-          <Message negative icon>
-            <Icon name="warning sign" />
-            <Message.Content>
-              <Message.Header>Ooops. Invalid token it seems.</Message.Header>
-            </Message.Content>
-          </Message>
+          <div negative>
+            <div name="warning sign" />
+            <div>
+              <h1>Ooops. Invalid token it seems.</h1>
+            </div>
+          </div>
         )}
       </div>
     );

@@ -25,8 +25,8 @@ TopNavigation.propTypes = {
 function mapStateToProps(state) {
   return {
     user: state.user,
-    isAuthenticated: !!state.user.remember_digest,
-    home: !!state.user.remember_digest ? "/dashboard" : "/",
+    isAuthenticated: state.session.signedIn,
+    home: "/",
   };
 }
 

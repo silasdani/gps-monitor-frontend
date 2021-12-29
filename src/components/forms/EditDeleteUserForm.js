@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button } from "semantic-ui-react";
 import InlineError from "../messages/InlineError";
-import api from "../../api";
 import { connect } from "react-redux";
 class EditDeleteTrackForm extends React.Component {
   state = {
@@ -16,21 +14,6 @@ class EditDeleteTrackForm extends React.Component {
     loading: false,
     errors: {},
   };
-
-  componentDidMount() {
-    const id = this.props.id;
-    this.setState({ loading: true });
-    api.users.getData(id).then((res) => {
-      var data = {
-        name: res.name,
-        email: res.email,
-        admin: res.admin,
-        manager: res.manager,
-        activated: res.activated,
-      };
-      this.setState({ loading: false, data });
-    });
-  }
 
   onChange = (e) =>
     this.setState({
@@ -74,8 +57,8 @@ class EditDeleteTrackForm extends React.Component {
     const { errors, data, loading } = this.state;
     const isAdmin = this.props.isAdmin;
     return (
-      <Form onSubmit={this.onSubmit} loading={loading} >
-        <Form.Field>
+      <form onSubmit={this.onSubmit} loading={loading} >
+        <div>
           <label htmlFor="name">Name</label>
           <input
             type="text"
@@ -84,10 +67,10 @@ class EditDeleteTrackForm extends React.Component {
             value={data.name}
             onChange={this.onChange}
           />
-        </Form.Field>
+        </div>
         {errors.name && <InlineError text={errors.name} />}
 
-        <Form.Field>
+        <div>
           <label htmlFor="email">Email</label>
           <input
             type="text"
@@ -96,10 +79,10 @@ class EditDeleteTrackForm extends React.Component {
             value={data.email}
             disabled={true}
           />
-        </Form.Field>
+        </div>
 
         {isAdmin && (
-          <Form.Field>
+          <div>
             <label htmlFor="admin">Admin</label>
             <input
               type="checkbox"
@@ -110,10 +93,10 @@ class EditDeleteTrackForm extends React.Component {
             />
             <br />
             {errors.admin && <InlineError text={errors.admin} />}
-          </Form.Field>
+          </div>
         )}
 
-        <Form.Field>
+        <div>
           <label htmlFor="manager">Manager</label>
           <input
             type="checkbox"
@@ -124,9 +107,9 @@ class EditDeleteTrackForm extends React.Component {
           />
           <br />
           {errors.manager && <InlineError text={errors.manager} />}
-        </Form.Field>
+        </div>
 
-        <Form.Field>
+        <div>
           <label htmlFor="activated">Activated</label>
           <input
             type="checkbox"
@@ -137,10 +120,10 @@ class EditDeleteTrackForm extends React.Component {
           />
           <br />
           {errors.activated && <InlineError text={errors.activated} />}
-        </Form.Field>
+        </div>
 
-        <Button primary>Update</Button>
-      </Form>
+        <input type="button" title='Update' />
+      </form>
     );
   }
 }

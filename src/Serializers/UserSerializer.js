@@ -16,6 +16,7 @@ export default class UserSerializer {
         if (parseInt(answer.status / 100) !== 2) return {};
 
         const { token } = answer.data;
+        localStorage.token = token;
         const data = token ? JSON.parse(jwtDecode(token)) : answer.data;
 
         const { attributes: { admin, manager, activated, ...user } } = data.data;

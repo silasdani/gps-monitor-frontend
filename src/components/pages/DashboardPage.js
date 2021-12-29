@@ -48,7 +48,7 @@ class DashboardPage extends React.Component {
   componentDidMount = () => this.props.fetchAll();
 
   render() {
-    const { isManagerOrAdmin, usersAll } = this.props;
+    const { usersAll } = this.props;
     return (
       <div>
         <div className="flex flex-row absolute h-20 mt-16  w-full justify-end space-x-10 px-10">
@@ -80,17 +80,15 @@ class DashboardPage extends React.Component {
           </button>
         </div>
         <div className="flex flex-col max-w-sm max-h-screen overflow-y-auto pt-16">
-          {isManagerOrAdmin && (
-            <div className="z-20 ml-16 py-5 min-h-32 max-w-32 space-y-10">
-              {usersAll?.map((user) => (
-                <UserContainer
-                  user={user}
-                  filtered={this.state.filtered}
-                  startTime={this.state.startTime}
-                  endTime={this.state.endTime} />
-              ))}
-            </div>
-          )}
+          <div className="z-20 ml-16 py-5 min-h-32 max-w-32 space-y-10">
+            {/* {usersAll?.map((user) => (
+              <UserContainer
+                user={user}
+                filtered={this.state.filtered}
+                startTime={this.state.startTime}
+                endTime={this.state.endTime} />
+            ))} */}
+          </div>
           {usersAll?.length === 0 && <div className="z-20 ml-16 py-5 min-h-32 max-w-32 space-y-10">
             <UserContainer user={this.props.user} />
           </div>}
@@ -109,11 +107,10 @@ DashboardPage.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const usersAll = Object.values(state.users);
-  const me = { attributes: state?.user };
+  const usersAll = [];
+  const { user } = state.session;
   return {
-    isManagerOrAdmin: !!state.user.manager || !!state.user.admin,
-    user: me,
+    user,
     usersAll,
   };
 }

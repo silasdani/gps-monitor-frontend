@@ -1,5 +1,5 @@
 import UserService from "../../services/UserService";
-import { userLoggedIn } from './sessionDuck'
+// import { userLoggedIn } from './sessionDuck'
 import UserSerializer from "../../Serializers/UserSerializer";
 
 export const USER_CREATED = "USER_CREATED";
@@ -79,7 +79,7 @@ export const signup = (data) => (dispatch) => {
     return new UserService().signup(data)
         .then((user) => {
             dispatch(userCreated());
-            dispatch(userLoggedIn(UserSerializer.deserialize(user)));
+            // dispatch(userLoggedIn(UserSerializer.deserialize(user)));
         })
         .catch(console.warn)
 }

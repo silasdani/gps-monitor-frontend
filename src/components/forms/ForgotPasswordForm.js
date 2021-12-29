@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Message } from "semantic-ui-react";
 import isEmail from "validator/lib/isEmail";
 import InlineError from "../messages/InlineError";
 
@@ -43,9 +42,9 @@ class ForgotPasswordForm extends React.Component {
     const { errors, data, loading } = this.state;
 
     return (
-      <Form onSubmit={this.onSubmit} loading={loading}>
-        {!!errors.global && <Message negative>{errors}</Message>}
-        <Form.Field error={!!errors.email}>
+      <form onSubmit={this.onSubmit} loading={loading}>
+        {!!errors.global && <div negative>{errors}</div>}
+        <div error={!!errors.email}>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -56,9 +55,9 @@ class ForgotPasswordForm extends React.Component {
             onChange={this.onChange}
           />
           {errors.email && <InlineError text={errors.email} />}
-        </Form.Field>
-        <Button primary>Send</Button>
-      </Form>
+        </div>
+        <input type="button" title="Send" />
+      </form>
     );
   }
 }

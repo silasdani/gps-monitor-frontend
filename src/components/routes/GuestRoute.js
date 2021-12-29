@@ -18,9 +18,9 @@ UserRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
-    isAuthenticated: !!state.user.remember_digest,
+    isAuthenticated: state.session.signedIn,
   };
 }
 

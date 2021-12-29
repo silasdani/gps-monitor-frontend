@@ -1,15 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button } from "semantic-ui-react";
 import { editUser, deleteUser } from "../../redux/ducks/userDuck"
 import EditDeleteUserForm from "../forms/EditDeleteUserForm";
 
 class EditUserPage extends React.Component {
-  submit = (user) =>
-    this.props
-      .editUser(user, this.props.match.params.id)
-      .then(() => this.props.history.push("/users"));
+  submit = (user) => ({})
+    // this.props
+    //   .editUser(user, this.props.match.params.id)
+    //   .then(() => this.props.history.push("/users"));
 
   delete = () => {
     this.props
@@ -22,13 +21,12 @@ class EditUserPage extends React.Component {
       <div>
         <h1>User #{id}</h1>
         <EditDeleteUserForm submit={this.submit} id={id} />
-        <Button
+        <input
           disabled={id === localStorage.id}
           negative
           onClick={this.delete}
-        >
-          Delete
-        </Button>
+          title="Delete"
+        />
       </div>
     );
   }

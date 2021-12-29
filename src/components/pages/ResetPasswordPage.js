@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Message } from "semantic-ui-react";
 import ResetPasswordForm from "../forms/ResetPasswordForm";
 import { resetPassword, validateToken } from "../../redux/ducks/userDuck"
 
@@ -29,10 +28,10 @@ class ResetPasswordPage extends React.Component {
 
     return (
       <div>
-        {loading && <Message>Loading</Message>}
+        {loading && <span>Loading</span>}
         {!loading &&
           success && <ResetPasswordForm submit={this.submit} token={token} />}
-        {!loading && !success && <Message>Invalid Token</Message>}
+        {!loading && !success && <span>Invalid Token</span>}
       </div>
     );
   }
