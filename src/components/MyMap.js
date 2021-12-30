@@ -19,9 +19,13 @@ export class MyMap extends Component {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {locations?.map(position => <Marker position={position}>
-                        <Popup>{position.location_title}</Popup>
-                    </Marker>)}
+                    {locations?.map(position =>
+                        <Marker
+                            position={position}
+                            key={Math.random()*1000}
+                        >
+                            <Popup>{position.location_title}</Popup>
+                        </Marker>)}
                 </MapContainer>
             </div>)
     }

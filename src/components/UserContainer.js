@@ -5,16 +5,15 @@ import { fetchUserLocationsByDate, fetchUserLocations } from '../redux/ducks/loc
 
 class UserContainer extends Component {
     onUserClick = () => {
-        const { id } = this.props.user?.attributes;
+        const { id } = this.props.user;
         const { filtered, startTime, endTime } = this.props;
         if (!filtered) this.props.fetchUserLocations(id);
         else if (!!startTime && !!endTime) {
             this.props.fetchUserLocationsByDate(id, {
-                date: {
-                    start_time: startTime,
-                    end_time: endTime
-                }
-            });
+                start_time: startTime,
+                end_time: endTime
+            }
+            );
         }
     }
 
@@ -22,12 +21,12 @@ class UserContainer extends Component {
         const { name, id, email } = this.props.user;
 
         return (<button
-            className={"bg-gray-100 bg-opacity-60 border border-gray-100 rounded-xl hover:border-gray-500  focus:bg-gray-200 focus:border-opacity-0"}
+            className={"w-full bg-gray-100 bg-opacity-60 border border-gray-100 rounded-xl hover:border-gray-500  focus:bg-gray-200 focus:border-opacity-0"}
             onClick={this.onUserClick}
         >
             <figure className='rounded-xl'>
-                <img className="rounded-full mx-auto" src={`https://i.pravatar.cc/150?u=#{id}`} alt='' />
-                <div className="pt-6 text-center space-y-4">
+                <img className="rounded-full mx-auto p-3" src={`https://i.pravatar.cc/150?u=${id}`} alt='' />
+                <div className="pt-6 text-center ">
                     <blockquote>
                         <p className="text-lg font-semibold">#{id}</p>
                     </blockquote>

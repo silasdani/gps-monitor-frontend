@@ -1,6 +1,4 @@
 import UserService from "../../services/UserService";
-// import { userLoggedIn } from './sessionDuck'
-import UserSerializer from "../../Serializers/UserSerializer";
 
 export const USER_CREATED = "USER_CREATED";
 export const RESET_USER_PASSWORD = "RESET_USER_PASSWORD";
@@ -59,7 +57,7 @@ export const validateToken = (token) => (dispatch) => {
 
 export const fetchAll = () => (dispatch) => {
     return new UserService().fetchAll()
-        .then((data) => dispatch(allUsersFetched(data.data)))
+        .then((data) => dispatch(allUsersFetched(data)))
         .catch(console.warn);
 }
 
@@ -77,10 +75,7 @@ export const resetPassword = (credentials) => (dispatch) => {
 
 export const signup = (data) => (dispatch) => {
     return new UserService().signup(data)
-        .then((user) => {
-            dispatch(userCreated());
-            // dispatch(userLoggedIn(UserSerializer.deserialize(user)));
-        })
+        .then(dispatch(userCreated()))
         .catch(console.warn)
 }
 

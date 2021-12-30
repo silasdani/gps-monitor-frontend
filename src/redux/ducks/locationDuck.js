@@ -26,8 +26,6 @@ export const fetchUserLocationsByDate = (id, date) => (dispatch) => {
         .then((locations) => {
             if (Array.isArray(locations)) {
                 dispatch(locationsFetched(LocationSerializer.deserialize(locations)))
-            } else {
-                dispatch(locationsFetchedFailed(locations.message))
             }
         })
         .catch(res => dispatch(locationsFetchedFailed(res)));

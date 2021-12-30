@@ -13,6 +13,12 @@ const App = ({ location }) => (
   <React.Fragment>
     <TopNavigation />
     <MyMap />
+    <UserRoute
+      location={location}
+      path="/dashboard"
+      exact
+      component={DashboardPage}
+    />
     <Route
       location={location}
       path={"/confirmation/:token/:action"}
@@ -42,12 +48,6 @@ const App = ({ location }) => (
       path="/reset_password/:token"
       exact
       component={ResetPasswordPage}
-    />
-    <UserRoute
-      location={location}
-      path="/dashboard"
-      exact
-      component={DashboardPage}
     />
     <UserRoute
       location={location}

@@ -72,22 +72,23 @@ class DashboardPage extends React.Component {
               {this.state.endDateError}
             </div>}
           </div>
-          <button className={this.state.filtered ? "bg-blue-500 hover:bg-blue-700 text-pink-50 font-bold py-2 px-4 rounded z-50 h-10" : "bg-gray-500 hover:bg-gray-700 text-pink-50 font-bold py-2 px-4 rounded z-50 h-10 ml-10 "}
+          <button className={this.state.filtered ? "bg-blue-500 hover:bg-blue-700 text-pink-50 font-bold py-2 px-4 rounded z-40 h-10" : "bg-gray-500 hover:bg-gray-700 text-pink-50 font-bold py-2 px-4 rounded z-40 h-10 ml-10 "}
             onClick={() => this.setState({ ...this.state, filtered: !this.state.filtered })}
           >
             {this.state.filtered && <span>ON</span>}
             {!this.state.filtered && <span>OFF</span>}
           </button>
         </div>
-        <div className="flex flex-col max-w-sm max-h-screen overflow-y-auto pt-16">
+        <div className="flex flex-col max-w-md max-h-screen overflow-y-auto pt-16">
           <div className="z-20 ml-16 py-5 min-h-32 max-w-32 space-y-10">
-            {/* {usersAll?.map((user) => (
+            {usersAll?.map((user) => (
               <UserContainer
-                user={user}
+                key={Math.random()}
+                user={user.attributes}
                 filtered={this.state.filtered}
                 startTime={this.state.startTime}
                 endTime={this.state.endTime} />
-            ))} */}
+            ))}
           </div>
           {usersAll?.length === 0 && <div className="z-20 ml-16 py-5 min-h-32 max-w-32 space-y-10">
             <UserContainer user={this.props.user} />
@@ -106,11 +107,11 @@ DashboardPage.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const usersAll = [];
+  const { users = [] } = state.user;
   const { user } = state.session;
   return {
     user,
-    usersAll,
+    usersAll: users,
   };
 }
 

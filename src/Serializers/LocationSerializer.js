@@ -3,8 +3,8 @@ export default class LocationSerializer {
         if (Array.isArray(data)) {
             return data.map(({ attributes }) => ({
                 ...attributes,
-                latitude: Number(attributes?.latitude),
-                longitude: Number(attributes?.longitude),
+                lat: Number(attributes?.latitude),
+                lng: Number(attributes?.longitude),
                 latlng: {
                     latitude: Number(attributes?.latitude),
                     longitude: Number(attributes?.longitude),
@@ -14,8 +14,8 @@ export default class LocationSerializer {
 
         return {
             ...data.attributes,
-            latitude: Number(data.attributes?.latitude),
-            longitude: Number(data.attributes?.longitude),
+            lat: Number(data.attributes?.latitude),
+            lng: Number(data.attributes?.longitude),
             latlng: {
                 latitude: Number(data.attributes?.latitude),
                 longitude: Number(data.attributes?.longitude),

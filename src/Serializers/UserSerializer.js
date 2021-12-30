@@ -19,7 +19,7 @@ export default class UserSerializer {
         localStorage.token = token;
         const data = token ? JSON.parse(jwtDecode(token)) : answer.data;
 
-        const { attributes: { admin, manager, activated, ...user } } = data.data;
+        const { attributes: { manager, activated, ...user } } = data.data;
         return {
             ...user
         }
@@ -27,7 +27,7 @@ export default class UserSerializer {
 
     static deserializeToken(token) {
         const data = JSON.parse(jwtDecode(token));
-        const { attributes: { admin, manager, activated, ...user } } = data.data;
+        const { attributes: { manager, activated, ...user } } = data.data;
 
         return {
             ...user
